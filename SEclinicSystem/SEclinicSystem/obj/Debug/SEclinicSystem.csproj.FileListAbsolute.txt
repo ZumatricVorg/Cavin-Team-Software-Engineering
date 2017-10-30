@@ -7,3 +7,6 @@ C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSys
 C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.pdb
 C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.csprojResolveAssemblyReference.cache
 C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.Form1.resources
+C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.exe.config
+C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.exe
+C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.pdb

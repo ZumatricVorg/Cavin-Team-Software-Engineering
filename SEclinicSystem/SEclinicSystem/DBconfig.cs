@@ -11,13 +11,13 @@ namespace SEclinicSystem
     {
         // Create the connectionString
         // Trusted_Connection is used to denote the connection uses Windows Authentication
-        SqlConnection cnn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\LENOVO\Documents\OverSurgery.mdf; Integrated Security = True; Connect Timeout = 30");
+        static String cnString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\LENOVO\Documents\OverSurgery.mdf; Integrated Security = True; Connect Timeout = 30";
+        SqlConnection cnn = new SqlConnection(cnString);
 
         public void selectAll()
         {
             
             SqlCommand command = new SqlCommand("SELECT * FROM Position", cnn);
-
             cnn.Open();
             SqlDataReader reader = command.ExecuteReader();
 
