@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Data;
+=======
+>>>>>>> origin/Crystal
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -42,7 +45,7 @@ namespace SEclinicSystem
             Staff staff = new Staff();
             SqlCommand command = new SqlCommand("select * from login inner join Staff ON login.staffID = staff.staffID WHERE login.username ='" + id + "'", cnn);
 
-            
+
             cnn.Open();
             reader = command.ExecuteReader();
             //da = new SqlDataAdapter(command);
@@ -55,6 +58,20 @@ namespace SEclinicSystem
 
             cnn.Close();
             return staff;
+        }
+        public void selectAll()
+        {
+            
+            SqlCommand command = new SqlCommand("SELECT * FROM Position", cnn);
+            cnn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string a = reader["positionName"].ToString();
+            }
+
+            cnn.Close();
         }
        
     }

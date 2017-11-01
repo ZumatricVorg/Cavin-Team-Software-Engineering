@@ -33,6 +33,7 @@ namespace SEclinicSystem
             return this.password;
         }
 
+
         private bool registerPatient(string name, string dob, string address)
         {
             return true;
