@@ -8,9 +8,8 @@ namespace SEclinicSystem
 {
     class Staff
     {
-        public string fullName { get; set; }
-        public string staffID { get; set; }
-
+        private string fullName;
+        private string staffID;
 
     }
 }
