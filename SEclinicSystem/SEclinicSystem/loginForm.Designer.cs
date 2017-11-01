@@ -1,6 +1,6 @@
 ﻿namespace SEclinicSystem
 {
-    partial class Form1
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,27 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.idBox = new System.Windows.Forms.TextBox();
+            this.pwBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.login = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // idBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(134, 64);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.idBox.Location = new System.Drawing.Point(134, 64);
+            this.idBox.MaxLength = 50;
+            this.idBox.Name = "idBox";
+            this.idBox.Size = new System.Drawing.Size(100, 20);
+            this.idBox.TabIndex = 1;
             // 
-            // textBox2
+            // pwBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(134, 124);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 1;
+            this.pwBox.Location = new System.Drawing.Point(134, 124);
+            this.pwBox.MaxLength = 50;
+            this.pwBox.Name = "pwBox";
+            this.pwBox.Size = new System.Drawing.Size(100, 20);
+            this.pwBox.TabIndex = 1;
+            this.pwBox.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -68,15 +71,15 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Password:";
             // 
-            // button1
+            // login
             // 
-            this.button1.Location = new System.Drawing.Point(158, 196);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.login.Location = new System.Drawing.Point(158, 196);
+            this.login.Name = "login";
+            this.login.Size = new System.Drawing.Size(75, 23);
+            this.login.TabIndex = 4;
+            this.login.Text = "Login";
+            this.login.UseVisualStyleBackColor = true;
+            this.login.Click += new System.EventHandler(this.login_Click);
             // 
             // label3
             // 
@@ -87,19 +90,19 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Welcome";
             // 
-            // Form1
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.login);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Controls.Add(this.pwBox);
+            this.Controls.Add(this.idBox);
+            this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,11 +110,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox idBox;
+        private System.Windows.Forms.TextBox pwBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button login;
         private System.Windows.Forms.Label label3;
     }
 }

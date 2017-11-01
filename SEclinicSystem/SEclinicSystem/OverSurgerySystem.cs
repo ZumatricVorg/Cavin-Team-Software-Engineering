@@ -8,10 +8,19 @@ namespace SEclinicSystem
 {
     class OverSurgerySystem
     {
+        DBconfig dbcon = new DBconfig(); 
 
-        private bool login(string loginID, string passowrd)
+        public bool login(string loginID, string password)
         {
-            return true;
+            bool access = dbcon.login(loginID, password);
+            return access;
+        }
+
+        public Staff credential(string id)
+        {
+
+            return dbcon.credential(id);
+            
         }
 
         private bool schedualeAppointment()
