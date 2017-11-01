@@ -22,7 +22,7 @@ namespace SEclinicSystem
             return true;
         }
 
-        private void check()
+        private void checke()
         {
 
         }
