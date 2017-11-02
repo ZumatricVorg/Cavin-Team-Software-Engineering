@@ -48,6 +48,7 @@
     <Compile Include="Appointment.cs" />
     <Compile Include="DBconfig.cs" />
     <Compile Include="GeneralPractitioner.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

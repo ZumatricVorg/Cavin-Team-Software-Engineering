@@ -12,7 +12,7 @@ namespace SEclinicSystem
 {
     public partial class PatientMain : Form
     {
-        OverSurgerySystem run;
+        DBconfig run = new DBconfig();
 
         public PatientMain()
         {

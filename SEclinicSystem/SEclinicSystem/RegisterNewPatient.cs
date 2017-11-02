@@ -12,7 +12,7 @@ namespace SEclinicSystem
 {
     public partial class RegisterNewPatient : Form
     {
-        Patient patient;
+        Patient patient = new Patient();
 
         public RegisterNewPatient()
         {
@@ -45,6 +45,7 @@ namespace SEclinicSystem
                 MessageBox.Show("Failed");
                 Clear();
             }
+           
         }
 
         public bool checkValidation()

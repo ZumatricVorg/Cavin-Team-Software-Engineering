@@ -37,5 +37,11 @@ namespace SEclinicSystem
         {
            
         }
+
+        private void SearchPatient_Click(object sender, EventArgs e)
+        {
+            PatientSearch fPatientSearch = new PatientSearch();
+            fPatientSearch.Show();
+        }
     }
 }

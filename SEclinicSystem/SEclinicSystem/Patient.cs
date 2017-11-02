@@ -9,7 +9,7 @@ namespace SEclinicSystem
 {
     class Patient
     {
-        OverSurgerySystem run;
+        DBconfig run = new DBconfig();
 
         public string searchPatient(string patientID = "", string name = "", string dateOfBirth = "", string address = "")
         {
@@ -127,7 +127,7 @@ namespace SEclinicSystem
 
         public string registerPatient(string name, string NRIC, string DOB, string phoneNo, string email, string address, string gender)
         {
-            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender] VALUES ('" + name + "','" + NRIC + "','" + DOB + "','" + phoneNo + "','" + email + "','" + address.Replace("'", "''").Replace("/", "//") + "','" + gender + "')";
+            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + name + "','" + NRIC + "','" + DOB + "','" + phoneNo + "','" + email + "','" + address.Replace("'", "''").Replace("/", "//") + "','" + gender + "')";
 
             int result = run.WriteData(tempQuery);
 

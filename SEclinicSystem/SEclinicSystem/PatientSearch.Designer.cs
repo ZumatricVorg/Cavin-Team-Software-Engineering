@@ -58,7 +58,7 @@
             this.label3.Location = new System.Drawing.Point(44, 263);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 25);
+            this.label3.Size = new System.Drawing.Size(85, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "Address: ";
             // 
@@ -67,7 +67,7 @@
             this.txtDOB.Location = new System.Drawing.Point(200, 426);
             this.txtDOB.Margin = new System.Windows.Forms.Padding(4);
             this.txtDOB.Name = "txtDOB";
-            this.txtDOB.Size = new System.Drawing.Size(449, 28);
+            this.txtDOB.Size = new System.Drawing.Size(449, 24);
             this.txtDOB.TabIndex = 9;
             // 
             // label1
@@ -77,7 +77,7 @@
             this.label1.Location = new System.Drawing.Point(44, 426);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 25);
+            this.label1.Size = new System.Drawing.Size(125, 20);
             this.label1.TabIndex = 8;
             this.label1.Text = "Date Of Birth: ";
             // 
@@ -86,7 +86,7 @@
             this.txtPatientName.Location = new System.Drawing.Point(200, 204);
             this.txtPatientName.Margin = new System.Windows.Forms.Padding(4);
             this.txtPatientName.Name = "txtPatientName";
-            this.txtPatientName.Size = new System.Drawing.Size(449, 28);
+            this.txtPatientName.Size = new System.Drawing.Size(449, 24);
             this.txtPatientName.TabIndex = 11;
             // 
             // label2
@@ -96,7 +96,7 @@
             this.label2.Location = new System.Drawing.Point(44, 207);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(154, 25);
+            this.label2.Size = new System.Drawing.Size(127, 20);
             this.label2.TabIndex = 10;
             this.label2.Text = "Patient Name: ";
             // 
@@ -105,7 +105,7 @@
             this.txtPatientID.Location = new System.Drawing.Point(200, 144);
             this.txtPatientID.Margin = new System.Windows.Forms.Padding(4);
             this.txtPatientID.Name = "txtPatientID";
-            this.txtPatientID.Size = new System.Drawing.Size(449, 28);
+            this.txtPatientID.Size = new System.Drawing.Size(449, 24);
             this.txtPatientID.TabIndex = 13;
             // 
             // label4
@@ -115,7 +115,7 @@
             this.label4.Location = new System.Drawing.Point(44, 147);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(119, 25);
+            this.label4.Size = new System.Drawing.Size(100, 20);
             this.label4.TabIndex = 12;
             this.label4.Text = "Patient ID: ";
             // 
@@ -126,7 +126,7 @@
             this.label5.Location = new System.Drawing.Point(229, 47);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(216, 32);
+            this.label5.Size = new System.Drawing.Size(169, 26);
             this.label5.TabIndex = 14;
             this.label5.Text = "Search Patient";
             // 
@@ -162,7 +162,7 @@
             // 
             // PatientSearch
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 595);
             this.Controls.Add(this.button3);
@@ -180,6 +180,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PatientSearch";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PatientSearch";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -77,6 +77,7 @@
             this.SearchPatient.TabIndex = 3;
             this.SearchPatient.Text = "Search Patient";
             this.SearchPatient.UseVisualStyleBackColor = true;
+            this.SearchPatient.Click += new System.EventHandler(this.SearchPatient_Click);
             // 
             // listView1
             // 

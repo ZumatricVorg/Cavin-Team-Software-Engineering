@@ -30,8 +30,7 @@ C:\Users\cryst\Desktop\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSy
 C:\Users\cryst\Desktop\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.exe.config
 C:\Users\cryst\Desktop\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.exe
 C:\Users\cryst\Desktop\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.pdb
-=======
-C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.exe.config
-C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.exe
-C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.pdb
 >>>>>>> origin/001--Add-creation-of-table-for-database
+C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.PatientMain.resources
+C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.PatientSearch.resources
+C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.RegisterNewPatient.resources
