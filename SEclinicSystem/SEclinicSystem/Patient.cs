@@ -10,7 +10,7 @@ namespace SEclinicSystem
     class Patient
     {
 
-        DBconfig run = new DBconfig();
+        OverSurgerySystem run = new OverSurgerySystem();
 
 
         public string searchPatient(string patientID = "", string name = "", string dateOfBirth = "", string address = "")
