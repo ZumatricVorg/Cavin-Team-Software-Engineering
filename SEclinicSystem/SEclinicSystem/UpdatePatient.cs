@@ -10,44 +10,54 @@ using System.Windows.Forms;
 
 namespace SEclinicSystem
 {
-    public partial class RegisterNewPatient : Form
+    public partial class UpdatePatient : Form
     {
-        Patient patient = new Patient(); 
+        Patient patient = new Patient();
+        OverSurgerySystem run = new OverSurgerySystem();
 
-        public RegisterNewPatient()
+        public UpdatePatient()
         {
             InitializeComponent();
-            ddlGender.Items.Clear();
-            ddlGender.Items.Insert(0, "- Select a gender -");
-            ddlGender.Items.Insert(1, "Male");
-            ddlGender.Items.Insert(2, "Female");
+
+            setValue();
         }
 
-        //create new patient
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-
             if (!checkValidation())
             {
                 return;
             }
 
-            string result = patient.registerPatient(txtPatientName.Text,txtNRIC.Text, dtpDOB.Value.Date.ToString(), txtPhoneNo.Text, txtEmail.Text, txtAddress.Text.Replace(Environment.NewLine, "\\n"), ddlGender.SelectedValue.ToString());
+            string result = patient.updatePatientDetails(PatientSearch.patientID, txtPatientName.Text, txtNRIC.Text, dtpDOB.Value.Date.ToString(), txtPhoneNo.Text, txtEmail.Text, txtAddress.Text.Replace(Environment.NewLine, "\\n"), ddlGender.SelectedValue.ToString()); 
 
-            if (result != "")
+            if(result == "Y")
             {
-                
-                MessageBox.Show("This patient has successfully registered in the system. \n PatientID is "+ result +" .");
-                Clear();
-                this.Hide();
-                var PatientSearch = new PatientSearch();
-                PatientSearch.Show();
-
+                MessageBox.Show("Update patient's details successful!");
+                this.Close();                
             }
-            else
+            else if (result == "N")
             {
-                MessageBox.Show("Failed");
+                MessageBox.Show("Update patient's details failed!");
                 Clear();
+            }
+        }
+
+        public void setValue()
+        {
+            string tempQuery = "select [name], [NRIC], [dateOfBirth], [phoneNo], [email], [address], [gender] FROM [Patient] where patientId = '" + PatientSearch.patientID + "'";
+
+            DataTable result = run.getLocalSQLData(tempQuery);
+
+            if (result.Rows.Count > 0)
+            {
+                txtPatientName.Text = result.Rows[0]["name"].ToString();
+                txtNRIC.Text = result.Rows[0]["NRIC"].ToString();
+                ddlGender.SelectedIndex = ddlGender.Items.IndexOf(result.Rows[0]["gender"].ToString());
+                dtpDOB.Value = (DateTime)result.Rows[0]["dateOfBirth"];
+                txtPhoneNo.Text = result.Rows[0]["phoneNo"].ToString();
+                txtEmail.Text = result.Rows[0]["email"].ToString();
+                txtAddress.Text = result.Rows[0]["address"].ToString().Replace("\r\n", Environment.NewLine);
             }
         }
 
@@ -110,11 +120,6 @@ namespace SEclinicSystem
             txtPhoneNo.Text = "";
             txtEmail.Text = "";
             txtAddress.Text = "";
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            this.Hide();
         }
     }
 }

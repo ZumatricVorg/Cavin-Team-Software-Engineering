@@ -13,7 +13,7 @@ namespace SEclinicSystem
     public partial class PatientSearch : Form
     {
 
-        Patient patient;
+        Patient patient = new Patient();
 
         public static string patientID = "";
         public static string patientName = "";

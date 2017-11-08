@@ -44,7 +44,7 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(200, 262);
+            this.txtAddress.Location = new System.Drawing.Point(183, 186);
             this.txtAddress.Margin = new System.Windows.Forms.Padding(4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
@@ -55,7 +55,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(44, 263);
+            this.label3.Location = new System.Drawing.Point(27, 187);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 25);
@@ -64,7 +64,7 @@
             // 
             // txtDOB
             // 
-            this.txtDOB.Location = new System.Drawing.Point(200, 426);
+            this.txtDOB.Location = new System.Drawing.Point(183, 350);
             this.txtDOB.Margin = new System.Windows.Forms.Padding(4);
             this.txtDOB.Name = "txtDOB";
             this.txtDOB.Size = new System.Drawing.Size(449, 28);
@@ -74,7 +74,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(44, 426);
+            this.label1.Location = new System.Drawing.Point(27, 350);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(149, 25);
@@ -83,7 +83,7 @@
             // 
             // txtPatientName
             // 
-            this.txtPatientName.Location = new System.Drawing.Point(200, 204);
+            this.txtPatientName.Location = new System.Drawing.Point(183, 128);
             this.txtPatientName.Margin = new System.Windows.Forms.Padding(4);
             this.txtPatientName.Name = "txtPatientName";
             this.txtPatientName.Size = new System.Drawing.Size(449, 28);
@@ -93,7 +93,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(44, 207);
+            this.label2.Location = new System.Drawing.Point(27, 131);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(154, 25);
@@ -102,7 +102,7 @@
             // 
             // txtPatientID
             // 
-            this.txtPatientID.Location = new System.Drawing.Point(200, 144);
+            this.txtPatientID.Location = new System.Drawing.Point(183, 68);
             this.txtPatientID.Margin = new System.Windows.Forms.Padding(4);
             this.txtPatientID.Name = "txtPatientID";
             this.txtPatientID.Size = new System.Drawing.Size(449, 28);
@@ -112,7 +112,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(44, 147);
+            this.label4.Location = new System.Drawing.Point(27, 71);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(119, 25);
@@ -123,7 +123,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(229, 47);
+            this.label5.Location = new System.Drawing.Point(221, 11);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(216, 32);
@@ -132,7 +132,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(49, 498);
+            this.button1.Location = new System.Drawing.Point(32, 422);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(166, 46);
             this.button1.TabIndex = 15;
@@ -142,7 +142,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(483, 498);
+            this.button2.Location = new System.Drawing.Point(466, 422);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(166, 46);
             this.button2.TabIndex = 16;
@@ -152,7 +152,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(235, 498);
+            this.button3.Location = new System.Drawing.Point(218, 422);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(226, 46);
             this.button3.TabIndex = 17;
@@ -164,7 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(705, 595);
+            this.ClientSize = new System.Drawing.Size(678, 492);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

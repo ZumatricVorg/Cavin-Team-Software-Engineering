@@ -12,7 +12,7 @@ namespace SEclinicSystem
 {
     public partial class PatientMain : Form
     {
-        OverSurgerySystem run;
+        OverSurgerySystem run = new OverSurgerySystem();
 
         public PatientMain()
         {
@@ -36,7 +36,7 @@ namespace SEclinicSystem
                 lblDOB.Text = result.Rows[0]["dateOfBirth"].ToString();
                 lblPhoneNo.Text = result.Rows[0]["phoneNo"].ToString();
                 lblEmail.Text = result.Rows[0]["email"].ToString();
-                lblAddress.Text = result.Rows[0]["address"].ToString();
+                lblAddress.Text = result.Rows[0]["address"].ToString().Replace("\r\n",Environment.NewLine);
             }
         }
 
@@ -45,6 +45,12 @@ namespace SEclinicSystem
             this.Hide();
             var PatientSearch = new PatientSearch();
             PatientSearch.Show();
+        }
+
+        private void btnUpdateDetails_Click(object sender, EventArgs e)
+        {
+            var UP = new UpdatePatient();
+            UP.Show();
         }
     }
 }
