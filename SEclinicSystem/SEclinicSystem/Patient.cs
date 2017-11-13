@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace SEclinicSystem
 {
     class Patient
     {
-        DBconfig run = new DBconfig();
+        OverSurgerySystem run = new OverSurgerySystem();
 
         public string searchPatient(string patientID = "", string name = "", string dateOfBirth = "", string address = "")
         {
@@ -17,7 +18,6 @@ namespace SEclinicSystem
             {
                 //filter with patientID
                 DataTable result = run.getLocalSQLData(@"SELECT top 1 [patientID] FROM [Patient] a with(nolock)  where patientID  ='" + patientID + "' order by patientID asc");
-
                 if (result != null)
                 {
                     if (result.Rows.Count > 0)
@@ -25,20 +25,19 @@ namespace SEclinicSystem
                         return "Yes";
                     }
                     else
-                    {                        
+                    {
                         return "No";
                     }
                 }
                 else
-                { 
+                {
                     return "No";
                 }
-            }        
+            }
             else if (name != "" && dateOfBirth != "")
             {
                 //filter with name and dateOfBirth
-                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [dateOfBirth] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + Convert.ToDateTime(dateOfBirth) + "' and name ='"+ name +"'order by patientID asc");
-
+                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [dateOfBirth] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + Convert.ToDateTime(dateOfBirth) + "' and name ='" + name + "'order by patientID asc");
                 if (result != null)
                 {
                     if (result.Rows.Count > 0)
@@ -80,8 +79,8 @@ namespace SEclinicSystem
             {
                 //no result
                 return "No";
-            }                
-            
+            }
+
         }
 
         public string getID(string name = "", string DOB = "", string address = "")
@@ -154,6 +153,5 @@ namespace SEclinicSystem
         {
             return true;
         }
-         
     }
-}
+ }

@@ -25,6 +25,7 @@ namespace SEclinicSystem
         public LoginForm()
         {
             InitializeComponent();
+            Application.Run(new AppointmentMain());
         }
 
         private void login_Click(object sender, EventArgs e)

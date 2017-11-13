@@ -12,8 +12,8 @@ namespace SEclinicSystem
 {
     public partial class PatientMain : Form
     {
-        DBconfig run = new DBconfig();
 
+        OverSurgerySystem run = new OverSurgerySystem();
         public PatientMain()
         {
             InitializeComponent();
