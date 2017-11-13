@@ -16,31 +16,13 @@ namespace SEclinicSystem
 {
     class OverSurgerySystem
     {
-<<<<<<< HEAD
-        DBconfig dbcon = new DBconfig();
-        Staff staff = new Staff();
-        DataTable dtResult = new DataTable();
-        Int32 result;
 
-        public bool login(string loginID, string password)
-        {
-            result = dbcon.getLocalSQLDataCount("SELECT COUNT(*) FROM login where username ='" + loginID + "' AND password = '" + password + "'");
-            //SqlDataReader reader = command.ExecuteReader();
-           
-            if(result > 0)
-            {
-                return true;
-            }
-
-=======
-       
         Staff staff = new Staff();
         DataTable dtResult = new DataTable();
         Int32 result;
 
         // Create the connectionString
         // Trusted_Connection is used to denote the connection uses Windows Authentication
-
         //"Integrated Security=SSPI;Persist Security Info=False;Data Source=.\\SQLEXPRESS;Initial Catalog=OverSurgery;";
         static string c = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\LENOVO\Documents\OverSurgery.mdf; Integrated Security = True; Connect Timeout = 30";
         SqlConnection cnn = new SqlConnection(c);
@@ -179,23 +161,12 @@ namespace SEclinicSystem
             {
                 return true;
             }
->>>>>>> 198e533e545c6f44f5cb9d74be1b23d2d6ebeba9
+
             return false;
         }
 
         public Staff credential(string id)
         {
-<<<<<<< HEAD
-            dtResult = dbcon.getLocalSQLData("select * from login inner join Staff ON login.staffID = staff.staffID WHERE login.username ='" + id + "'");
-            staff.fullName = dtResult.Rows[0]["name"].ToString();
-            staff.staffID = dtResult.Rows[0]["staffID"].ToString();
-            return staff;
-            
-        }
-
-       
-
-=======
 
              dtResult = getLocalSQLData("SELECT * FROM login INNER JOIN Staff on login.staffID = Staff.staffID WHERE login.username = '" + id+"'");
              staff.staffID = dtResult.Rows[0]["staffID"].ToString();
@@ -230,7 +201,6 @@ namespace SEclinicSystem
 
         }
       
->>>>>>> 198e533e545c6f44f5cb9d74be1b23d2d6ebeba9
         private void checkAndPrintResult()
         {
 

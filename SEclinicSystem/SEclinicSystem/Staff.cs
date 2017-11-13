@@ -11,6 +11,5 @@ namespace SEclinicSystem
         public string fullName { get; set; }
         public string staffID { get; set; }
 
-
     }
 }

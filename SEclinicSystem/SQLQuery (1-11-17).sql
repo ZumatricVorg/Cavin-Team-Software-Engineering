@@ -1,4 +1,4 @@
-USE [OverSurgery]
+USE [master]
 GO
 
 /****** Object:  Database [OverSurgery]    Script Date: 1/11/2017 11:29:29 AM ******/
