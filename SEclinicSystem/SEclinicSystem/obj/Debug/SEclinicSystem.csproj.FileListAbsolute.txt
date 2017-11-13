@@ -48,3 +48,4 @@ C:\Users\LENOVO\Desktop\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.P
 C:\Users\LENOVO\Desktop\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.RegisterNewPatient.resources
 C:\Users\LENOVO\Desktop\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.exe
 C:\Users\LENOVO\Desktop\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.pdb
+C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.AppointmentMain.resources
