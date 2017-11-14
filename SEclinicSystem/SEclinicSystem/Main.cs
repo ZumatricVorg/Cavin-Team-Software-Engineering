@@ -20,8 +20,8 @@ namespace SEclinicSystem
                  
             InitializeComponent();
             staff = system.credential(username);
-            staffID.Text = staff.staffID;
-            staffName.Text = staff.fullName;
+            staffID.Text = staff.StaffID;
+            staffName.Text = staff.FullName;
            // pictureBox1.Image = Image.FromFile("C:\Users\LENOVO\Desktop\ARU\Software Engineer\Cavin-Team-Software-Engineering\user.png");
 
         }

@@ -40,16 +40,15 @@ namespace SEclinicSystem
                 //String id = idBox.Text;
                 //String pw = pwBox.Text;
            
-                receptionist.SetloginID(idBox.Text);
-                receptionist.SetPassword(pwBox.Text);
+                receptionist.LoginID = idBox.Text;
+                receptionist.Password = pwBox.Text;
 
-
-               access = overSystem.login(receptionist.GetloginID(),receptionist.GetPassword()); 
+               access = overSystem.login(receptionist.LoginID, receptionist.Password); 
 
                 if(access == true)
                 {
                     this.Hide();
-                    Main main = new Main(receptionist.GetloginID());
+                    Main main = new Main(receptionist.LoginID);
                     main.ShowDialog();
 
                 }else

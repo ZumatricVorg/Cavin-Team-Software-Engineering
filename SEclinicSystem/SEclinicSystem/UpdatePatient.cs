@@ -14,6 +14,7 @@ namespace SEclinicSystem
     public partial class UpdatePatient : Form
     {
         Patient patient = new Patient();
+        PatientHandler ph = new PatientHandler();
         OverSurgerySystem run = new OverSurgerySystem();
 
         public UpdatePatient()
@@ -37,7 +38,15 @@ namespace SEclinicSystem
                 return;
             }
 
-            string result = patient.updatePatientDetails(patient.getID(), txtPatientName.Text, txtNRIC1.Text+"-"+txtNRIC2.Text+"-"+txtNRIC3.Text, dtpDOB.Value.Date, txtPhoneNo.Text, txtEmail.Text, txtAddress.Text.Replace(Environment.NewLine, "\\n"), ddlGender.SelectedValue.ToString()); 
+            patient.Name = txtPatientName.Text;
+            patient.NRIC = txtNRIC1.Text + "-" + txtNRIC2.Text + "-" + txtNRIC3.Text;
+            patient.DOB = dtpDOB.Value.Date;
+            patient.PhoneNo = txtPhoneNo.Text;
+            patient.Email = txtEmail.Text;
+            patient.Address = txtAddress.Text.Replace(Environment.NewLine, "\\n");
+            patient.Gender = ddlGender.SelectedValue.ToString();
+
+            string result = ph.updatePatientDetails(patient); 
 
             if(result == "Y")
             {
@@ -52,7 +61,7 @@ namespace SEclinicSystem
 
         public void setValue()
         {
-            string tempQuery = "select [name], [NRIC], [dateOfBirth], [phoneNo], [email], [address], [gender] FROM [Patient] where patientId = '" + patient.getID() + "'";
+            string tempQuery = "select [name], [NRIC], [dateOfBirth], [phoneNo], [email], [address], [gender] FROM [Patient] where patientId = '" + patient.PatientID + "'";
 
             DataTable result = run.getLocalSQLData(tempQuery);
 
