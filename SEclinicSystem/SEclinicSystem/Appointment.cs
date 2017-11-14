@@ -12,6 +12,45 @@ namespace SEclinicSystem
         private string patientName;
         private string gpName;
 
+        public DateTime DateTime
+        {
+            get
+            {
+                return dateTime;
+            }
+
+            set
+            {
+                dateTime = value;
+            }
+        }
+
+        public string PatientName
+        {
+            get
+            {
+                return patientName;
+            }
+
+            set
+            {
+                patientName = value;
+            }
+        }
+
+        public string GpName
+        {
+            get
+            {
+                return gpName;
+            }
+
+            set
+            {
+                gpName = value;
+            }
+        }
+
         private bool book()
         {
             return true;
