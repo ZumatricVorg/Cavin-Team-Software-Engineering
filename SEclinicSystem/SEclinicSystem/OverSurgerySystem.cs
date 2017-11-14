@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Data.OleDb;
+using System.Data;
+using System.Configuration;
+using System.IO;
+
 
 namespace SEclinicSystem
 {
     class OverSurgerySystem
     {
-       
-        Staff staff = new Staff();
-        DataTable dtResult = new DataTable();
-        Int32 result;
 
-        // Create the connectionString
-        // Trusted_Connection is used to denote the connection uses Windows Authentication
-
-        //"Integrated Security=SSPI;Persist Security Info=False;Data Source=.\\SQLEXPRESS;Initial Catalog=OverSurgery;";
-        static string c = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\LENOVO\Documents\OverSurgery.mdf; Integrated Security = True; Connect Timeout = 30";
-        SqlConnection cnn = new SqlConnection(c);
-        Log log = new Log();
+        private bool login(string loginID, string password)
+        {
+            return true;
+        }
 
         //retrive data
         public DataTable getLocalSQLData(string query)
         {
             try
             {
+
+                string c = "Integrated Security=SSPI;Persist Security Info=False;Data Source=.\\SQLEXPRESS;Initial Catalog=OverSurgery;";
 
                 using (SqlConnection conn = new SqlConnection(c))
                 {
@@ -56,7 +55,7 @@ namespace SEclinicSystem
             }
             catch (Exception ex)
             {
-                log.writeLog("WEB", "getLocalSQLData", "query: " + query + " ; Err :" + ex.ToString());
+                Log("OverSurgery", "getLocalSQLData", "query: " + query + " ; Err :" + ex.ToString());
                 //  MessageBox.Show(ex.ToString());
                 return null;
             }
@@ -64,51 +63,13 @@ namespace SEclinicSystem
             { }
         }
 
-        //retrieve count data
-        public Int32 getLocalSQLDataCount(string query)
-        {
-            try
-            {
-
-                using (SqlConnection conn = new SqlConnection(c))
-                {
-                    if (conn.State == ConnectionState.Closed)
-                    {
-                        conn.Open();
-                    }
-
-                    SqlCommand cmd = conn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = query;
-                    cmd.CommandTimeout = 0;
-
-                    Int32 count = (Int32)cmd.ExecuteScalar();
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-                    //  Log("WEB", "getLocalSQLData", "query: " + query);
-                    return count;
-                }
-            }
-            catch (Exception ex)
-
-            {
-                log.writeLog("WEB", "getLocalSQLData", "query: " + query + " ; Err :" + ex.ToString());
-                //  MessageBox.Show(ex.ToString());
-
-                return 0;
-            }
-            finally
-            { }
-        }
-
-
         //write data
         public int WriteData(string query)
         {
+           
             try
             {
+                string c = "Integrated Security=SSPI;Persist Security Info=False;Data Source=.\\SQLEXPRESS;Initial Catalog=OverSurgery;";
 
                 using (SqlConnection conn = new SqlConnection(c))
                 {
@@ -139,7 +100,7 @@ namespace SEclinicSystem
             }
             catch (Exception ex)
             {
-                log.writeLog("WEB", "WriteDBLog", "Err :" + ex.ToString());
+                Log("WEB", "WriteDBLog", "Err :" + ex.ToString());
                 return 0;
             }
             finally
@@ -148,53 +109,47 @@ namespace SEclinicSystem
 
         }
 
-        public bool login(string loginID, string password)
+        //write Log file
+        public void Log(string filename, string functionName, string msg)
         {
-            result = getLocalSQLDataCount("SELECT* FROM login where username = '"+ loginID + "' AND password = '"+ password + "'");
-            
-            if (result > 0)
+            try
             {
-                return true;
+               //filePath of the Log folder
+                string filepath = "C:\\Users\\cryst\\Documents\\Cavin-Team-Software-Engineering\\SEclinicSystem\\Log";
+                string logtime = DateTime.Now.ToString("yyyy_MM_dd");
+
+                if (!Directory.Exists(filepath)) Directory.CreateDirectory(filepath);
+
+                msg = String.Format("{0,-25}", DateTime.Now.ToString()) + " : " + String.Format("{0,-30}", functionName) + " : " + msg;
+
+                //check log file size, generate new once reach 10mb, only if file exist
+                if (File.Exists(filepath + filename + "_" + logtime + ".txt"))
+                {
+                    FileInfo fInfo = new FileInfo(filepath + filename + "_" + logtime + ".txt");
+                    //long fSize = fInfo.Length;
+                    if (fInfo.Length >= 10485760)
+                    {
+                        File.Move(filepath + filename + "_" + logtime + ".txt", filepath + filename + DateTime.Now.ToString("yyyy_MM_dd_hhmmss") + ".txt");
+                    }
+                }
+
+                StreamWriter sw = new StreamWriter(filepath + filename + "_" + logtime + ".txt", true);
+                sw.WriteLine(msg);
+                // sw.WriteLine("");    //add extra line 
+                sw.Flush();
+                sw.Close();
+
+                sw = null;
             }
-            return false;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            { }
         }
 
-        public Staff credential(string id)
-        {
 
-             dtResult = getLocalSQLData("SELECT * FROM login INNER JOIN Staff on login.staffID = Staff.staffID WHERE login.username = '" + id+"'");
-             staff.staffID = dtResult.Rows[0]["staffID"].ToString();
-             staff.fullName = dtResult.Rows[0]["name"].ToString();
-             return staff;
-
-        }
-
-        private bool schedualeAppointment()
-        {
-            return true;
-        }
-        private string searchPatient(string patientID = "", string name = "", DateTime dateOfBirth = new DateTime(), string address = "")
-        {
-            if (patientID != "")
-            {
-                //filter with patientID
-            }
-            else if (name != "" && dateOfBirth != new DateTime())
-            {
-                //filter with name and dateOfBirth
-            }
-            else if (name != "" && address != "")
-            {
-                //filter with name and address
-            }
-            else
-            {
-                //no result
-            }
-            return "";
-
-        }
-      
         private void checkAndPrintResult()
         {
 

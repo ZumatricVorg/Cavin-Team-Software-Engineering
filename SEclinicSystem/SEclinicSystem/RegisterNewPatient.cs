@@ -7,16 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace SEclinicSystem
 {
     public partial class RegisterNewPatient : Form
     {
-        Patient patient = new Patient();
+        Patient patient = new Patient(); 
 
         public RegisterNewPatient()
         {
             InitializeComponent();
+            ddlGender.Items.Clear();
+            ddlGender.Items.Insert(0, "- Select a gender -");
+            ddlGender.Items.Insert(1, "Male");
+            ddlGender.Items.Insert(2, "Female");
         }
 
         //create new patient
@@ -28,7 +33,7 @@ namespace SEclinicSystem
                 return;
             }
 
-            string result = patient.registerPatient(txtPatientName.Text,txtNRIC.Text, txtDOB.Text, txtPhoneNo.Text, txtEmail.Text, txtAddress.Text.Replace(Environment.NewLine, "\\n"), txtGender.Text);
+            string result = patient.registerPatient(txtPatientName.Text,txtNRIC1.Text+"-"+txtNRIC2.Text+"-"+txtNRIC3.Text, dtpDOB.Value.Date, txtPhoneNo.Text, txtEmail.Text, txtAddress.Text.Replace(Environment.NewLine, "\\n"), ddlGender.SelectedValue.ToString());
 
             if (result != "")
             {
@@ -45,49 +50,158 @@ namespace SEclinicSystem
                 MessageBox.Show("Failed");
                 Clear();
             }
-           
         }
 
         public bool checkValidation()
         {
             bool validation = true;
 
+            //patient name validation
             if (txtPatientName.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's name.");
                 txtPatientName.Focus();
                 return false;
             }
-            else if (txtNRIC.Text.Trim() == "")
+            else if(txtPatientName.Text.Trim() != "")
             {
-                MessageBox.Show("Please fill up patient's NRIC.");
-                txtNRIC.Focus();
+                Regex emp1 = new Regex("^[a-z-A-Z]+$");
+
+                if (!emp1.IsMatch(txtPatientName.Text))
+                {
+                    MessageBox.Show("Only ALPHABETIC letters");
+                    txtPatientName.Focus();
+                    return false;
+                }
+            }
+            //NRIC validation
+            else if (txtNRIC1.Text.Trim() == "")
+            {
+                MessageBox.Show("Please fill up patient's NRIC column 1.");
+                txtNRIC1.Focus();
                 return false;
             }
-            else if (txtDOB.Text.Trim() == "")
+            else if (txtNRIC2.Text.Trim() == "")
             {
-                MessageBox.Show("Please fill up patient's birth date.");
-                txtDOB.Focus();
+                MessageBox.Show("Please fill up patient's NRIC column 2.");
+                txtNRIC1.Focus();
                 return false;
             }
-            else if (txtGender.Text.Trim() == "")
+            else if (txtNRIC3.Text.Trim() == "")
             {
-                MessageBox.Show("Please fill up patient's gender.");
-                txtGender.Focus();
+                MessageBox.Show("Please fill up patient's NRIC column 3.");
+                txtNRIC1.Focus();
                 return false;
             }
+            else if (txtNRIC1.Text.Trim() != "")
+            {
+                Regex emp1 = new Regex("^[0-9]");
+
+                if(txtNRIC1.Text.Length < 6)
+                {
+                    MessageBox.Show("Need 6 digits");
+                    txtNRIC1.Focus();
+                    return false;
+                }
+                else if (!emp1.IsMatch(txtNRIC1.Text))
+                {
+                    MessageBox.Show("Only numeric number");
+                    txtNRIC1.Focus();
+                    return false;
+                }
+            }
+            else if (txtNRIC2.Text.Trim() != "")
+            {
+                Regex emp1 = new Regex("^[0-9]");
+
+                if (txtNRIC2.Text.Length < 2)
+                {
+                    MessageBox.Show("Need 2 digits");
+                    txtNRIC2.Focus();
+                    return false;
+                }
+                else if (!emp1.IsMatch(txtNRIC2.Text))
+                {
+                    MessageBox.Show("Only numeric number");
+                    txtNRIC2.Focus();
+                    return false;
+                }
+            }
+            else if (txtNRIC3.Text.Trim() != "")
+            {
+                Regex emp1 = new Regex("^[0-9]");
+
+                if (txtNRIC3.Text.Length < 6)
+                {
+                    MessageBox.Show("Need 6 digits");
+                    txtNRIC3.Focus();
+                    return false;
+                }
+                else if (!emp1.IsMatch(txtNRIC3.Text))
+                {
+                    MessageBox.Show("Only numeric number");
+                    txtNRIC3.Focus();
+                    return false;
+                }
+            }
+            // Date of birth validation
+            else if (dtpDOB.Value.Date > DateTime.Now.Date)
+            {
+                MessageBox.Show("Invalid date.");
+                dtpDOB.Focus();
+                return false;
+            }
+            // Gender validation
+            else if (ddlGender.SelectedIndex == 0)
+            {
+                MessageBox.Show("Please select a patient's gender.");
+                ddlGender.Focus();
+                return false;
+            }
+            //Phone number validation
             else if (txtPhoneNo.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's contact number.");
                 txtPhoneNo.Focus();
                 return false;
             }
+            else if (txtPhoneNo.Text.Trim() != "")
+            {
+                Regex emp1 = new Regex("^[0-9]");
+
+                if(txtPhoneNo.Text.Length < 10)
+                {
+                    MessageBox.Show("Minimum 10 digits");
+                    txtPhoneNo.Focus();
+                    return false;
+                }
+                else if (!emp1.IsMatch(txtPhoneNo.Text))
+                {
+                    MessageBox.Show("Only numeric letters");
+                    txtPhoneNo.Focus();
+                    return false;
+                }                
+            }
+            // Email validation
             else if (txtEmail.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's email address.");
                 txtEmail.Focus();
                 return false;
             }
+            else if(txtEmail.Text.Trim() != "")
+            {
+                Regex emp1 = new Regex(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+
+                if (!emp1.IsMatch(txtEmail.Text))
+                {
+                    MessageBox.Show("Invalid email aadress");
+                    txtEmail.Focus();
+                    return false;
+                }
+                
+            }
+            // Address validation
             else if (txtAddress.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's address.");
@@ -101,9 +215,11 @@ namespace SEclinicSystem
         public void Clear()
         {
             txtPatientName.Text = "";
-            txtNRIC.Text = "";
-            txtDOB.Text = "";
-            txtGender.Text = "";
+            txtNRIC1.Text = "";
+            txtNRIC2.Text = "";
+            txtNRIC3.Text = "";
+            dtpDOB.Value = DateTime.Now.Date;
+            ddlGender.SelectedIndex = 0;
             txtPhoneNo.Text = "";
             txtEmail.Text = "";
             txtAddress.Text = "";
