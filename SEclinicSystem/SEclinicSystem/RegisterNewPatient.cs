@@ -12,15 +12,11 @@ namespace SEclinicSystem
 {
     public partial class RegisterNewPatient : Form
     {
-        Patient patient = new Patient(); 
+        Patient patient = new Patient();
 
         public RegisterNewPatient()
         {
             InitializeComponent();
-            ddlGender.Items.Clear();
-            ddlGender.Items.Insert(0, "- Select a gender -");
-            ddlGender.Items.Insert(1, "Male");
-            ddlGender.Items.Insert(2, "Female");
         }
 
         //create new patient
@@ -32,7 +28,7 @@ namespace SEclinicSystem
                 return;
             }
 
-            string result = patient.registerPatient(txtPatientName.Text,txtNRIC.Text, dtpDOB.Value.Date.ToString(), txtPhoneNo.Text, txtEmail.Text, txtAddress.Text.Replace(Environment.NewLine, "\\n"), ddlGender.SelectedValue.ToString());
+            string result = patient.registerPatient(txtPatientName.Text,txtNRIC.Text, txtDOB.Text, txtPhoneNo.Text, txtEmail.Text, txtAddress.Text.Replace(Environment.NewLine, "\\n"), txtGender.Text);
 
             if (result != "")
             {
@@ -49,6 +45,7 @@ namespace SEclinicSystem
                 MessageBox.Show("Failed");
                 Clear();
             }
+           
         }
 
         public bool checkValidation()
@@ -67,16 +64,16 @@ namespace SEclinicSystem
                 txtNRIC.Focus();
                 return false;
             }
-            else if (dtpDOB.Value.Date == DateTime.Now.Date)
+            else if (txtDOB.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's birth date.");
-                dtpDOB.Focus();
+                txtDOB.Focus();
                 return false;
             }
-            else if (ddlGender.SelectedIndex == 0)
+            else if (txtGender.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's gender.");
-                ddlGender.Focus();
+                txtGender.Focus();
                 return false;
             }
             else if (txtPhoneNo.Text.Trim() == "")
@@ -105,8 +102,8 @@ namespace SEclinicSystem
         {
             txtPatientName.Text = "";
             txtNRIC.Text = "";
-            dtpDOB.Value = DateTime.Now.Date;
-            ddlGender.SelectedIndex = 0;
+            txtDOB.Text = "";
+            txtGender.Text = "";
             txtPhoneNo.Text = "";
             txtEmail.Text = "";
             txtAddress.Text = "";

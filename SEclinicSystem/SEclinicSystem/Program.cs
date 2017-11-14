@@ -16,7 +16,7 @@ namespace SEclinicSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PatientSearch());
+            Application.Run(new LoginForm());
         }
     }
 }

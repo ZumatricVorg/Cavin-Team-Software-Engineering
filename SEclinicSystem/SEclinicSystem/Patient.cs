@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
 
 namespace SEclinicSystem
 {
     class Patient
     {
+
         OverSurgerySystem run = new OverSurgerySystem();
+
 
         public string searchPatient(string patientID = "", string name = "", string dateOfBirth = "", string address = "")
         {
@@ -25,19 +27,19 @@ namespace SEclinicSystem
                         return "Yes";
                     }
                     else
-                    {                        
+                    {
                         return "No";
                     }
                 }
                 else
-                { 
+                {
                     return "No";
                 }
-            }        
+            }
             else if (name != "" && dateOfBirth != "")
             {
                 //filter with name and dateOfBirth
-                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [dateOfBirth] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + Convert.ToDateTime(dateOfBirth) + "' and name ='"+ name +"'order by patientID asc");
+                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [dateOfBirth] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + Convert.ToDateTime(dateOfBirth) + "' and name ='" + name + "'order by patientID asc");
 
                 if (result != null)
                 {
@@ -58,7 +60,7 @@ namespace SEclinicSystem
             else if (name != "" && address != "")
             {
                 //filter with name and address
-                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [address] FROM [Patient] a with(nolock)  where address like '%" + address + "%' and name ='" + name + "'order by patientID asc");
+                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [address] FROM [Patient] a with(nolock)  where address  ='" + address + "' and name ='" + name + "'order by patientID asc");
 
                 if (result != null)
                 {
@@ -80,8 +82,8 @@ namespace SEclinicSystem
             {
                 //no result
                 return "No";
-            }                
-            
+            }
+
         }
 
         public string getID(string name = "", string DOB = "", string address = "")
@@ -106,7 +108,7 @@ namespace SEclinicSystem
             }
             else if (name != "" && address != "")
             {
-                DataTable result = run.getLocalSQLData(@"SELECT top 1 [patientID] FROM [Patient] a with(nolock)  where address like '%" + address + "%' and name ='" + name + "'order by patientID asc");
+                DataTable result = run.getLocalSQLData(@"SELECT top 1 [patientID] FROM [Patient] a with(nolock)  where address  ='" + address + "' and name ='" + name + "'order by patientID asc");
                 if (result != null)
                 {
                     if (result.Rows.Count > 0)
@@ -127,7 +129,6 @@ namespace SEclinicSystem
 
         public string registerPatient(string name, string NRIC, string DOB, string phoneNo, string email, string address, string gender)
         {
-            string ID = "";
             string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + name + "','" + NRIC + "','" + DOB + "','" + phoneNo + "','" + email + "','" + address.Replace("'", "''").Replace("/", "//") + "','" + gender + "')";
 
             int result = run.WriteData(tempQuery);
@@ -138,42 +139,22 @@ namespace SEclinicSystem
 
                 if (r.Rows.Count > 0)
                 {
-                    ID = r.Rows[0]["PatientID"].ToString();
+                    string ID = r.Rows[0]["PatientID"].ToString();
                     return ID;
                 }
 
             }
             else
             {
-                return ID;
+                return "";
             }
 
-            return ID;
-        }
-
-        public string updatePatientDetails(string ID, string name, string NRIC, string DOB, string phoneNo, string email, string address, string gender)
-        {
-            string status = "N";
-            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + name + "','" + NRIC + "','" + DOB + "','" + phoneNo + "','" + email + "','" + address.Replace("'", "''").Replace("/", "//") + "','" + gender + "' where patientId ='"+ ID +"')";
-
-            int result = run.WriteData(tempQuery);
-
-            if (result > 0)
-            {
-                return status = "Y";
-            }
-            else
-            {
-                return status = "N";
-            }
-
-            return status;
+            return "";
         }
 
         private bool scheduleAppointment()
         {
             return true;
         }
-         
+        }
     }
-}
