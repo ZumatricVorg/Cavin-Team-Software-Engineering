@@ -69,6 +69,7 @@
     <Compile Include="Nurse.cs" />
     <Compile Include="OverSurgerySystem.cs" />
     <Compile Include="Patient.cs" />
+    <Compile Include="PatientHandler.cs" />
     <Compile Include="PatientMain.cs">
       <SubType>Form</SubType>
     </Compile>
