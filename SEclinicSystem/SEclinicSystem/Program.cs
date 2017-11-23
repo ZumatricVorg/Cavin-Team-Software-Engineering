@@ -19,6 +19,7 @@ namespace SEclinicSystem
             Application.Run(new LoginForm());
             //Application.Run(new PatientSearch());
             //Application.Run(new AppointmentMain());
+            //Application.Run(new Main("1"));
         }
     }
 }

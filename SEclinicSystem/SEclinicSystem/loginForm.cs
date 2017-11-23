@@ -14,7 +14,7 @@ namespace SEclinicSystem
     public partial class LoginForm : Form
     {
         
-        OverSurgerySystem overSystem = new OverSurgerySystem();
+        ReceptionistHandler rHdler = new ReceptionistHandler();
         Receptionist receptionist = new Receptionist();
         bool access;
             
@@ -43,7 +43,7 @@ namespace SEclinicSystem
                 receptionist.LoginID = idBox.Text;
                 receptionist.Password = pwBox.Text;
 
-               access = overSystem.login(receptionist.LoginID, receptionist.Password); 
+               access = rHdler.login(receptionist); 
 
                 if(access == true)
                 {

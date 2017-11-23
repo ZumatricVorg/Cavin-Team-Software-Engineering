@@ -6,69 +6,49 @@ using System.Threading.Tasks;
 
 namespace SEclinicSystem
 {
-    class Appointment
+    public class Appointment
     {
-        private DateTime dateTime;
-        private string patientName;
-        private string gpName;
+        private DateTime date;
+        private DateTime time;
+        private string remark;
 
-        public DateTime DateTime
+        public DateTime Date
         {
             get
             {
-                return dateTime;
+                return date;
             }
 
             set
             {
-                dateTime = value;
+                date = value;
             }
         }
 
-        public string PatientName
+        public DateTime Time
         {
             get
             {
-                return patientName;
+                return time;
             }
 
             set
             {
-                patientName = value;
+                time = value;
             }
         }
 
-        public string GpName
+        public string Remark
         {
             get
             {
-                return gpName;
+                return remark;
             }
 
             set
             {
-                gpName = value;
+                remark = value;
             }
-        }
-
-        private bool book()
-        {
-            return true;
-        }
-
-        private bool change()
-        {
-            return true;
-        }
-
-        private void check()
-        {
-
-        }
-
-        private void cancel()
-        {
-
         }
     }
 }

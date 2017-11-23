@@ -16,7 +16,8 @@ namespace SEclinicSystem
             try
             {
                 //filePath of the Log folder
-                string filepath = "C:\\Users\\LENOVO\\Desktop\\ARU\\Software Engineer\\Cavin-Team-Software-Engineering\\SEclinicSystem\\log\\";
+                string parent = Directory.GetCurrentDirectory();
+                string filepath = parent+ "\\log\\";
                 string logtime = DateTime.Now.ToString("yyyy_MM_dd");
 
                 if (!Directory.Exists(filepath)) Directory.CreateDirectory(filepath);

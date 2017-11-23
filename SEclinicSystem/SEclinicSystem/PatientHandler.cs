@@ -34,10 +34,10 @@ namespace SEclinicSystem
                     return "No";
                 }
             }
-            else if (patient.Name != "" && patient.DOB != new DateTime())
+            else if (patient.Name != "" && patient.DOB1 != new DateTime())
             {
                 //filter with name and dateOfBirth
-                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [dateOfBirth] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + patient.DOB.Date.ToString() + "' and name ='" + patient.Name + "'order by patientID asc");
+                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [dateOfBirth] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + patient.DOB1.Date.ToString() + "' and name ='" + patient.Name + "'order by patientID asc");
 
                 if (result != null)
                 {
@@ -88,9 +88,9 @@ namespace SEclinicSystem
 
         public void generateID(Patient patient)
         {
-            if (patient.Name != "" && patient.DOB != new DateTime())
+            if (patient.Name != "" && patient.DOB1 != new DateTime())
             {
-                DataTable result = run.getLocalSQLData(@"SELECT top 1 [patientID] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + patient.DOB + "' and name ='" + patient.Name + "'order by patientID asc");
+                DataTable result = run.getLocalSQLData(@"SELECT top 1 [patientID] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + patient.DOB1 + "' and name ='" + patient.Name + "'order by patientID asc");
                 if (result != null)
                 {
                     if (result.Rows.Count > 0)
@@ -116,13 +116,13 @@ namespace SEclinicSystem
         public string registerPatient(Patient patient)
         {            
             string ID = "";
-            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + patient.Name + "','" + patient.NRIC + "','" + patient.DOB.ToString() + "','" + patient.PhoneNo + "','" + patient.Email + "','" + patient.Address.Replace("'", "''").Replace("/", "//") + "','" + patient.Gender + "')";
+            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + patient.Name + "','" + patient.NRIC1 + "','" + patient.DOB1.ToString("yyyy-MM-dd") + "','" + patient.PhoneNo + "','" + patient.Email + "','" + patient.Address.Replace("'", "''").Replace("/", "//") + "','" + patient.Gender + "')";
 
             int result = run.WriteData(tempQuery);
 
             if (result > 0)
             {
-                DataTable r = run.getLocalSQLData(@"SELECT top 1 [PatientID] FROM [Patient] a with(nolock)  where NRIC  ='" + patient.NRIC + "'order by patientID asc");
+                DataTable r = run.getLocalSQLData(@"SELECT top 1 [PatientID] FROM [Patient] a with(nolock)  where NRIC  ='" + patient.NRIC1 + "'order by patientID asc");
 
                 if (r.Rows.Count > 0)
                 {
@@ -142,7 +142,7 @@ namespace SEclinicSystem
         public string updatePatientDetails(Patient patient)
         {
             string status = "N";
-            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + patient.Name + "','" + patient.NRIC + "','" + patient.DOB.ToString() + "','" + patient.PhoneNo + "','" + patient.Email + "','" + patient.Address.Replace("'", "''").Replace("/", "//") + "','" + patient.Gender + "' where patientId ='" + patient.PatientID + "')";
+            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + patient.Name + "','" + patient.NRIC1 + "','" + patient.DOB1.ToString() + "','" + patient.PhoneNo + "','" + patient.Email + "','" + patient.Address.Replace("'", "''").Replace("/", "//") + "','" + patient.Gender + "' where patientId ='" + patient.PatientID + "')";
 
             int result = run.WriteData(tempQuery);
 
@@ -156,5 +156,6 @@ namespace SEclinicSystem
             }
 
         }
+      
     }
 }

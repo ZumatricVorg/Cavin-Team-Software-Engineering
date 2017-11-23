@@ -35,12 +35,12 @@ namespace SEclinicSystem
             }
 
             patient.Name = txtPatientName.Text;
-            patient.NRIC = txtNRIC1.Text + "-" + txtNRIC2.Text + "-" + txtNRIC3.Text;
-            patient.DOB = dtpDOB.Value.Date;
+            patient.NRIC1 = txtNRIC1.Text + "-" + txtNRIC2.Text + "-" + txtNRIC3.Text;
+            patient.DOB1 = dtpDOB.Value.Date;
             patient.PhoneNo = txtPhoneNo.Text;
             patient.Email = txtEmail.Text;
             patient.Address = txtAddress.Text.Replace(Environment.NewLine, "\\n");
-            patient.Gender = ddlGender.SelectedValue.ToString();
+            patient.Gender = ddlGender.SelectedItem.ToString();
 
             string result = ph.registerPatient(patient);
             

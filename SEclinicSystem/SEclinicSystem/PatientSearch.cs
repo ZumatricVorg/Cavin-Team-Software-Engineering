@@ -38,7 +38,7 @@ namespace SEclinicSystem
                 {
                     patient.PatientID = txtPatientID.Text;
                     patient.Name = "";
-                    patient.DOB = new DateTime();
+                    patient.DOB1 = new DateTime();
                     patient.Address = "";
 
                     result = ph.searchPatient(patient);
@@ -64,7 +64,7 @@ namespace SEclinicSystem
                 {
                     patient.PatientID = "";
                     patient.Name = txtPatientName.Text;
-                    patient.DOB = dtpDOB.Value.Date;
+                    patient.DOB1 = dtpDOB.Value.Date;
                     patient.Address = "";
 
                     result = ph.searchPatient(patient);
@@ -90,7 +90,7 @@ namespace SEclinicSystem
                 {
                     patient.PatientID = "";
                     patient.Name = txtPatientName.Text;
-                    patient.DOB = new DateTime();
+                    patient.DOB1 = new DateTime();
                     patient.Address = txtAddress.Text.Replace(Environment.NewLine, "\\n");
 
                     result = ph.searchPatient(patient);

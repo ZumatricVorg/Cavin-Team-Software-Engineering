@@ -13,28 +13,40 @@ namespace SEclinicSystem
 {
     public partial class AppointmentMain : Form
     {
-        OverSurgerySystem dbCon = new OverSurgerySystem();
-        int result;
+       
+        Appointment app = new Appointment();
+        AppointmentHandler aHdler = new AppointmentHandler();
+        StaffHandler sHlder = new StaffHandler();
+        DataTable dtResult = new DataTable();
 
+        string message = "";
+        int count = 0;
+        Patient patient = new Patient();
 
-        public AppointmentMain()
+        public AppointmentMain(string pID)
         {
+            patient.PatientID = pID;
             InitializeComponent();
             gpNames();
             fillTime();
             fillRemark();
+
         }
 
         public void gpNames()
         {
-            gpName.Items.Add("doctor1");
+            dtResult = sHlder.selectAllDP();
+
+            foreach (DataRow row in dtResult.Rows)
+            {
+                gpName.Items.Add(row["name"].ToString());             
+            }       
+
+            gpName.SelectedIndex=0;
         }
 
         public void fillTime()
         {
-            //int minutes = DateTime.Now.Minute;
-            //int adjust = 10 - (minutes % 10);
-            // Timer.Interval = adjust * 60 * 1000;
 
             var start = DateTime.ParseExact("09:00", "HH:mm",CultureInfo.InvariantCulture);
             var clockQuery = from offset in Enumerable.Range(0,37)
@@ -42,24 +54,53 @@ namespace SEclinicSystem
 
             foreach (var time in clockQuery)
                 timeList.Items.Add(time.ToString("hh:mm tt"));
+            timeList.SelectedIndex = 0;
         }
 
         public void fillRemark()
         {
-            remark.Items.Add("immediate");
+            remark.Items.Add("None");
+            remark.Items.Add("Immediate");
+            remark.Items.Add("Others");
+            remark.SelectedIndex = 0;
         }
 
         private void createApt_Click(object sender, EventArgs e)
         {
-            if (remark.Text == "immediate")
+            Staff staff2 = new Staff();
+            app.Date = date.Value.Date;
+            app.Time = DateTime.Parse(timeList.SelectedItem.ToString());
+            app.Remark = remark.SelectedItem.ToString();
+            staff2.StaffID = dtResult.Rows[gpName.SelectedIndex]["staffID"].ToString();
+            DateTime aptTime = DateTime.Parse(app.Date.ToString("dd/MM/yyyy") + " " + app.Time.ToString("hh:mm tt"));
+
+            if (aptTime < DateTime.Now)
             {
-                result = dbCon.WriteData("INSERT INTO Appointment(staffID, startTime, startDate, Cstatus, remark) VALUES('1', '" + timeList.SelectedItem + "','" + date.Value.ToShortDateString() + "', 'pending', '" + remark.SelectedItem + "')");
-  
+                MessageBox.Show("Pass Time or Date is not allowed");
+                return;
+            }
+
+            if (app.Remark == "Immediate")
+            {
+                OverSurgerySystem dbCon = new OverSurgerySystem();
+                message = aHdler.book(patient.PatientID, staff2.StaffID, app);
+                MessageBox.Show(message);
             }
             else
             {
-
+                count = aHdler.check(staff2.StaffID, app);
+                if(count > 0)
+                {
+                    MessageBox.Show("Appointment Clash! Please select another Date");
+                    return;
+                }else
+                {
+                    message = aHdler.book(patient.PatientID, staff2.StaffID, app);
+                    MessageBox.Show(message);
+                }
             }
         }
+
+      
     }
 }

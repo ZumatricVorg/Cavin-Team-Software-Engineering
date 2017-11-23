@@ -41,7 +41,7 @@
             // 
             // createApt
             // 
-            this.createApt.Location = new System.Drawing.Point(12, 206);
+            this.createApt.Location = new System.Drawing.Point(15, 206);
             this.createApt.Name = "createApt";
             this.createApt.Size = new System.Drawing.Size(75, 23);
             this.createApt.TabIndex = 0;
@@ -61,7 +61,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 127);
+            this.label2.Location = new System.Drawing.Point(12, 119);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 2;
@@ -70,7 +70,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 169);
+            this.label3.Location = new System.Drawing.Point(12, 163);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 6;
@@ -86,7 +86,7 @@
             // 
             // date
             // 
-            this.date.Location = new System.Drawing.Point(75, 127);
+            this.date.Location = new System.Drawing.Point(75, 119);
             this.date.Name = "date";
             this.date.Size = new System.Drawing.Size(265, 20);
             this.date.TabIndex = 8;
@@ -94,7 +94,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 82);
+            this.label4.Location = new System.Drawing.Point(12, 81);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(30, 13);
             this.label4.TabIndex = 10;
@@ -103,7 +103,7 @@
             // timeList
             // 
             this.timeList.FormattingEnabled = true;
-            this.timeList.Location = new System.Drawing.Point(75, 82);
+            this.timeList.Location = new System.Drawing.Point(75, 81);
             this.timeList.Name = "timeList";
             this.timeList.Size = new System.Drawing.Size(265, 21);
             this.timeList.TabIndex = 11;
@@ -111,7 +111,7 @@
             // remark
             // 
             this.remark.FormattingEnabled = true;
-            this.remark.Location = new System.Drawing.Point(75, 169);
+            this.remark.Location = new System.Drawing.Point(75, 163);
             this.remark.Name = "remark";
             this.remark.Size = new System.Drawing.Size(265, 21);
             this.remark.TabIndex = 12;
@@ -120,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 241);
+            this.ClientSize = new System.Drawing.Size(364, 250);
             this.Controls.Add(this.remark);
             this.Controls.Add(this.timeList);
             this.Controls.Add(this.label4);
