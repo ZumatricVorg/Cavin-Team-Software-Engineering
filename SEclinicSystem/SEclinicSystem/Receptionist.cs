@@ -6,23 +6,37 @@ using System.Threading.Tasks;
 
 namespace SEclinicSystem
 {
-    class Receptionist:Staff
+    class Receptionist : Staff
     {
 
         private string loginID;
         private string password;
 
-       
-
-        private bool registerPatient(string name, string dob, string address)
+        public string LoginID
         {
-            return true;
+            get
+            {
+                return loginID;
+            }
+
+            set
+            {
+                loginID = value;
+            }
         }
 
-        private string checkDuty(DateTime searchDate,string staffID)
+        public string Password
         {
-            return "";
+            get
+            {
+                return password;
+            }
+
+            set
+            {
+                password = value;
+            }
         }
 
-    
+    }
 }

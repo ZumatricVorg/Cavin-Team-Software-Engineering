@@ -6,30 +6,20 @@ using System.Threading.Tasks;
 
 namespace SEclinicSystem
 {
-    class Appointment
+    public class Appointment
     {
-        private DateTime dateTime;
-        private string patientName;
-        private string gpName;
+        private string appointmentID;
+        private DateTime date;
+        private DateTime time;
+        private Patient patient;
+        private GeneralPractitioner gp;
+        private string status;
 
-        private bool book()
-        {
-            return true;
-        }
-
-        private bool change()
-        {
-            return true;
-        }
-
-        private void checke()
-        {
-
-        }
-
-        private void cancel()
-        {
-
-        }
+        public string AppointmentID { get => appointmentID; set => appointmentID = value; }
+        public DateTime Date { get => date; set => date = value; }
+        public DateTime Time { get => time; set => time = value; }
+        public Patient Patient { get => patient; set => patient = value; }
+        public string Status { get => status; set => status = value; }
+        internal GeneralPractitioner Gp { get => gp; set => gp = value; }
     }
 }
