@@ -99,11 +99,11 @@
       <DependentUpon>PrescriptionDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="PrescriptionHandler.cs" />
-    <Compile Include="PrescriptionSearchAdd.cs">
+    <Compile Include="PrescriptionSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrescriptionSearchAdd.Designer.cs">
-      <DependentUpon>PrescriptionSearchAdd.cs</DependentUpon>
+    <Compile Include="PrescriptionSearch.Designer.cs">
+      <DependentUpon>PrescriptionSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,6 +113,26 @@
     </Compile>
     <Compile Include="RegisterNewPatient.Designer.cs">
       <DependentUpon>RegisterNewPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report.cs" />
+    <Compile Include="ReportAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportAdd.Designer.cs">
+      <DependentUpon>ReportAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportHandler.cs" />
+    <Compile Include="ReportSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportSearch.Designer.cs">
+      <DependentUpon>ReportSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportViewPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportViewPrint.Designer.cs">
+      <DependentUpon>ReportViewPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="Staff.cs" />
     <Compile Include="UpdatePatient.cs">
@@ -142,8 +162,8 @@
     <EmbeddedResource Include="PrescriptionDetails.resx">
       <DependentUpon>PrescriptionDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrescriptionSearchAdd.resx">
-      <DependentUpon>PrescriptionSearchAdd.cs</DependentUpon>
+    <EmbeddedResource Include="PrescriptionSearch.resx">
+      <DependentUpon>PrescriptionSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -156,6 +176,15 @@
     </Compile>
     <EmbeddedResource Include="RegisterNewPatient.resx">
       <DependentUpon>RegisterNewPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportAdd.resx">
+      <DependentUpon>ReportAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSearch.resx">
+      <DependentUpon>ReportSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportViewPrint.resx">
+      <DependentUpon>ReportViewPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdatePatient.resx">
       <DependentUpon>UpdatePatient.cs</DependentUpon>

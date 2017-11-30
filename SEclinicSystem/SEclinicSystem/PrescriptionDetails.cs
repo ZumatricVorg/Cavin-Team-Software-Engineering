@@ -57,7 +57,7 @@ namespace SEclinicSystem
         //set datatabe and prescription details
         private void setPrescription()
         {
-            DataTable dt = ph.retrivePrescription();
+            DataTable dt = ph.retrivePrescription(prescription);
 
             lblPrescriptionID.Text  = prescription.PrescriptionID;
             lblGPName.Text = prescription.Staff.FullName;
@@ -89,7 +89,7 @@ namespace SEclinicSystem
 
         }
 
-        //go bac to patient main
+        //cancel extend prescription
         private void btnBack_Click(object sender, EventArgs e)
         {
             dataGridView1.Columns["Select"].Visible = false;
@@ -139,6 +139,14 @@ namespace SEclinicSystem
                 MessageBox.Show("Extend prescription failed!");
             }
 
+        }
+
+        //back to search prescription
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var ps = new PrescriptionSearch(prescription.Patient);
+            ps.Show();
         }
     }
 }

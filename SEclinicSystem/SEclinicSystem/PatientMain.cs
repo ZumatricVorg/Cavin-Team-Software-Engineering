@@ -75,8 +75,22 @@ namespace SEclinicSystem
         //search prescription
         private void button1_Click(object sender, EventArgs e)
         {
-            var sp = new PrescriptionSearchAdd(p);
+            var sp = new PrescriptionSearch(p);
             sp.Show();
+        }
+
+        //create new report
+        private void btnNewReport_Click(object sender, EventArgs e)
+        {
+            var ra = new ReportAdd(p);
+            ra.Show();
+        }
+
+        //search report
+        private void btnSearchReport_Click(object sender, EventArgs e)
+        {
+            var rs = new ReportSearch(p);
+            rs.Show();
         }
     }
 }

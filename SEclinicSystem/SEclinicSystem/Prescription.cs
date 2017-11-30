@@ -11,7 +11,7 @@ namespace SEclinicSystem
         private string prescriptionID;
         private Appointment appointment;
         private Medicine medicine;
-        private GeneralPractitioner staff;
+        private Staff staff;
         private Patient patient;
         private DateTime endDate;
         
@@ -20,7 +20,7 @@ namespace SEclinicSystem
         public Patient Patient { get => patient; set => patient = value; }
         public DateTime EndDate { get => endDate; set => endDate = value; }
         internal Appointment Appointment { get => appointment; set => appointment = value; }
-        internal GeneralPractitioner Staff { get => staff; set => staff = value; }
+        internal Staff Staff { get => staff; set => staff = value; }
     }
 
     

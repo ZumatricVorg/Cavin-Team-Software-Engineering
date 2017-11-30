@@ -11,7 +11,6 @@ namespace SEclinicSystem
     {
         OverSurgerySystem run = new OverSurgerySystem();
 
-        /*
         public DataTable retrivePrescription(Prescription prescription)
         {        
 
@@ -46,7 +45,6 @@ namespace SEclinicSystem
                 return null;
             }
         }
-        */
 
        //extend prescription method
         public int extendPrescription(Prescription prescription)

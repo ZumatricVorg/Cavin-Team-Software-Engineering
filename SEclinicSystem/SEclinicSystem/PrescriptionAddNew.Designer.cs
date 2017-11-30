@@ -147,6 +147,7 @@
             // 
             this.txtPatientName.Location = new System.Drawing.Point(129, 163);
             this.txtPatientName.Name = "txtPatientName";
+            this.txtPatientName.ReadOnly = true;
             this.txtPatientName.Size = new System.Drawing.Size(373, 22);
             this.txtPatientName.TabIndex = 13;
             // 

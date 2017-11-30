@@ -86,6 +86,7 @@ namespace SEclinicSystem
 
         }
 
+        //retrieve the patient ID
         public void generateID(Patient patient)
         {
             if (patient.Name != "" && patient.DOB != new DateTime())
@@ -113,6 +114,7 @@ namespace SEclinicSystem
 
         }
         
+        //add a new patient
         public string registerPatient(Patient patient)
         {            
             string ID = "";
@@ -139,6 +141,7 @@ namespace SEclinicSystem
             return ID;
         }
 
+        //update a patient details
         public string updatePatientDetails(Patient patient)
         {
             string status = "N";

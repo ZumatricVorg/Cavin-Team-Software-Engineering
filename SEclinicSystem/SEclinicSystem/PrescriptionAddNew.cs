@@ -30,12 +30,11 @@ namespace SEclinicSystem
         private void PrescriptionAddNew_Load(object sender, EventArgs e)
         {                        
             string resp = run.connect();
-            AutoCompleteStringCollection patientNameCollection = new AutoCompleteStringCollection();
             AutoCompleteStringCollection gpNameCollection = new AutoCompleteStringCollection();
 
             if (resp == "Done")
             {
-                SqlCommand cmd = new SqlCommand(@"select [staffName] FROM [Staff] order by staffName asc", run.getConn());
+                SqlCommand cmd = new SqlCommand(@"select [fullName] FROM [Staff] order by fullName asc", run.getConn());
                 SqlDataReader reader = cmd.ExecuteReader();                
                 while (reader.Read())
                 {
@@ -64,6 +63,8 @@ namespace SEclinicSystem
             checkMedicine.Width = 50;
             checkMedicine.ReadOnly = false;
             checkMedicine.FillWeight = 10;
+            checkMedicine.FalseValue = "0";
+            checkMedicine.TrueValue = "1";
             dataGridView1.Columns.Add(checkMedicine);
         }
 
@@ -78,7 +79,7 @@ namespace SEclinicSystem
             
             prescription.Appointment.AppointmentID = txtAppointmentID.Text.ToString();
 
-            DataTable gp = run.getLocalSQLData("SELECT [staffID] FROM [Staff] WHERE [Name] = '" + txtGPName.Text.ToString() + "' ORDER BY [staffID] ASC");
+            DataTable gp = run.getLocalSQLData("SELECT [staffID] FROM [Staff] WHERE [fullName] = '" + txtGPName.Text.ToString() + "' ORDER BY [staffID] ASC");
             prescription.Staff.StaffID = gp.Rows[0]["staffID"].ToString();
 
             prescription.EndDate = dtpEndDate.Value.Date;
@@ -111,27 +112,9 @@ namespace SEclinicSystem
         private bool checkValidation()
         {
             bool validation = true;
-
-            //patient name validation
-            if (txtPatientName.Text.Trim() == "")
-            {
-                MessageBox.Show("Please fill up patient's name.");
-                txtPatientName.Focus();
-                return false;
-            }
-            else if (txtPatientName.Text.Trim() != "")
-            {
-                Regex emp1 = new Regex("^[a-z-A-Z]+$");
-
-                if (!emp1.IsMatch(txtPatientName.Text))
-                {
-                    MessageBox.Show("Only ALPHABETIC letters");
-                    txtPatientName.Focus();
-                    return false;
-                }
-            }
+                        
             //GP Name validation
-            else if (txtGPName.Text.Trim() == "")
+            if (txtGPName.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up GP's name.");
                 txtGPName.Focus();
@@ -167,12 +150,17 @@ namespace SEclinicSystem
             {
                 int checkedBox = 0;
 
-                for (int j = 0; j < dataGridView1.Rows.Count; j++)
+                DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
+
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    if (Convert.ToBoolean(dataGridView1.Rows[j].Cells[5].Value) == true)
+                    ch1 = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[5];
+
+                    if (ch1.Value == ch1.TrueValue)
                     {
-                        checkedBox = checkedBox + 1;                       
+                        checkedBox = checkedBox + 1;
                     }
+
                 }
 
                 if (checkedBox == 0)
@@ -191,10 +179,25 @@ namespace SEclinicSystem
         //reset list
         private void clearList()
         {
-            txtPatientName.Text = "";
             txtGPName.Text = "";
             txtAppointmentID.Text = "";
-            dtpEndDate.Value = DateTime.Now;            
+            dtpEndDate.Value = DateTime.Now;
+            
+            if(dataGridView1 != null)
+            {
+                DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
+
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    ch1 = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[5];
+
+                    if (ch1.Value == ch1.TrueValue)
+                    {
+                        ch1.Value = ch1.FalseValue;
+                    }
+
+                }
+            }
         }
         
         //set txtPatientName textbox value (patient's name)

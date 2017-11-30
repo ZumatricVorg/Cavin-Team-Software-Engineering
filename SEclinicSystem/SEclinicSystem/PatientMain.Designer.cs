@@ -255,6 +255,7 @@
             this.btnSearchReport.TabIndex = 19;
             this.btnSearchReport.Text = "Search Report";
             this.btnSearchReport.UseVisualStyleBackColor = true;
+            this.btnSearchReport.Click += new System.EventHandler(this.btnSearchReport_Click);
             // 
             // btnNewReport
             // 
@@ -264,6 +265,7 @@
             this.btnNewReport.TabIndex = 20;
             this.btnNewReport.Text = "New Report";
             this.btnNewReport.UseVisualStyleBackColor = true;
+            this.btnNewReport.Click += new System.EventHandler(this.btnNewReport_Click);
             // 
             // button1
             // 
@@ -277,7 +279,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(204, 455);
+            this.button2.Location = new System.Drawing.Point(195, 455);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(151, 35);
             this.button2.TabIndex = 22;

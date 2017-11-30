@@ -42,6 +42,7 @@
             this.lblAppointmentID = new System.Windows.Forms.Label();
             this.blEndDate = new System.Windows.Forms.Label();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(450, 579);
+            this.button1.Location = new System.Drawing.Point(312, 579);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 43);
             this.button1.TabIndex = 1;
@@ -67,7 +68,7 @@
             // 
             // btnExtend
             // 
-            this.btnExtend.Location = new System.Drawing.Point(283, 579);
+            this.btnExtend.Location = new System.Drawing.Point(70, 579);
             this.btnExtend.Name = "btnExtend";
             this.btnExtend.Size = new System.Drawing.Size(151, 43);
             this.btnExtend.TabIndex = 2;
@@ -77,7 +78,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(614, 579);
+            this.btnBack.Location = new System.Drawing.Point(835, 579);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(151, 43);
             this.btnBack.TabIndex = 3;
@@ -175,11 +176,22 @@
             this.dtpEndDate.TabIndex = 14;
             this.dtpEndDate.Visible = false;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(580, 579);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(151, 43);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Back";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // PrescriptionDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1053, 634);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.dtpEndDate);
             this.Controls.Add(this.blEndDate);
             this.Controls.Add(this.label3);
@@ -218,5 +230,6 @@
         private System.Windows.Forms.Label lblAppointmentID;
         private System.Windows.Forms.Label blEndDate;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
+        private System.Windows.Forms.Button button2;
     }
 }
