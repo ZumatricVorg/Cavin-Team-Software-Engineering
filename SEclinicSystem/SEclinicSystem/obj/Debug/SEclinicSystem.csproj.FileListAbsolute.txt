@@ -1,9 +1,0 @@
-c:\users\lenovo\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.exe.config
-C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.exe
-C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\bin\Debug\SEclinicSystem.pdb
-C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.Properties.Resources.resources
-C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.csproj.GenerateResource.Cache
-C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.exe
-C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.pdb
-C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.csprojResolveAssemblyReference.cache
-C:\Users\LENOVO\documents\visual studio 2015\Projects\SEclinicSystem\SEclinicSystem\obj\Debug\SEclinicSystem.Form1.resources
