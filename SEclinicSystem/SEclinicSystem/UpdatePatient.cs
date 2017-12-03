@@ -13,14 +13,14 @@ namespace SEclinicSystem
 {
     public partial class UpdatePatient : Form
     {
-        Patient patient = new Patient();
+        Patient p = new Patient();
         PatientHandler ph = new PatientHandler();
         OverSurgerySystem run = new OverSurgerySystem();
 
-        public UpdatePatient()
+        public UpdatePatient(Patient patient)
         {
             InitializeComponent();
-
+            p = patient;
             Clear();
 
             ddlGender.Items.Clear();
@@ -38,15 +38,15 @@ namespace SEclinicSystem
                 return;
             }
 
-            patient.Name = txtPatientName.Text;
-            patient.NRIC1 = txtNRIC1.Text + "-" + txtNRIC2.Text + "-" + txtNRIC3.Text;
-            patient.DOB1 = dtpDOB.Value.Date;
-            patient.PhoneNo = txtPhoneNo.Text;
-            patient.Email = txtEmail.Text;
-            patient.Address = txtAddress.Text.Replace(Environment.NewLine, "\\n");
-            patient.Gender = ddlGender.SelectedValue.ToString();
+            p.Name = txtPatientName.Text;
+            p.NRIC1 = txtNRIC1.Text + "-" + txtNRIC2.Text + "-" + txtNRIC3.Text;
+            p.DOB1 = dtpDOB.Value.Date;
+            p.PhoneNo = txtPhoneNo.Text;
+            p.Email = txtEmail.Text;
+            p.Address = txtAddress.Text.Replace(Environment.NewLine, "\\n");
+            p.Gender = ddlGender.SelectedValue.ToString();
 
-            string result = ph.updatePatientDetails(patient); 
+            string result = ph.updatePatientDetails(p); 
 
             if(result == "Y")
             {
@@ -60,28 +60,18 @@ namespace SEclinicSystem
         }
 
         public void setValue()
-        {
-            string tempQuery = "select [name], [NRIC], [dateOfBirth], [phoneNo], [email], [address], [gender] FROM [Patient] where patientId = '" + patient.PatientID + "'";
-
-            DataTable result = run.getLocalSQLData(tempQuery);
-
-            if (result.Rows.Count > 0)
-            {
-                txtPatientName.Text = result.Rows[0]["name"].ToString();
-
-                //setting NRIC
-                string NRIC = result.Rows[0]["NRIC"].ToString();
-                string[] nricArray = NRIC.Split('-');
-                txtNRIC1.Text = nricArray[0];
-                txtNRIC2.Text = nricArray[1];
-                txtNRIC3.Text = nricArray[2];               
+        {           
+            //setting NRIC
+            string[] nricArray = p.NRIC1.Split('-');
+            txtNRIC1.Text = nricArray[0];
+            txtNRIC2.Text = nricArray[1];
+            txtNRIC3.Text = nricArray[2];               
                 
-                ddlGender.SelectedIndex = ddlGender.Items.IndexOf(result.Rows[0]["gender"].ToString());
-                dtpDOB.Value = (DateTime)result.Rows[0]["dateOfBirth"];
-                txtPhoneNo.Text = result.Rows[0]["phoneNo"].ToString();
-                txtEmail.Text = result.Rows[0]["email"].ToString();
-                txtAddress.Text = result.Rows[0]["address"].ToString().Replace("\r\n", Environment.NewLine);
-            }
+            ddlGender.SelectedIndex = ddlGender.Items.IndexOf(p.Gender);
+            dtpDOB.Value = (DateTime)p.DOB1;
+            txtPhoneNo.Text = p.PhoneNo;
+            txtEmail.Text = p.Email;
+            txtAddress.Text = p.Address;            
         }
 
         public bool checkValidation()

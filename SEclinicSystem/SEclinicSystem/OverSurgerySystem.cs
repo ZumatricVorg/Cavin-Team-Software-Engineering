@@ -12,15 +12,18 @@ using System.IO;
 
 namespace SEclinicSystem
 {
-   public class OverSurgerySystem
+    public class OverSurgerySystem
     {
+        Staff staff = new Staff();
+        DataTable dtResult = new DataTable();
+        Int32 result;
 
         // Create the connectionString
         // Trusted_Connection is used to denote the connection uses Windows Authentication
 
-       static string c = "Integrated Security=SSPI;Persist Security Info=False;Data Source=.\\SQLEXPRESS;Initial Catalog=OverSurgery;";
-        //static string c = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\LENOVO\Documents\OverSurgery.mdf; Integrated Security = True; Connect Timeout = 30";
-        SqlConnection cnn = new SqlConnection(c);
+        //"Integrated Security=SSPI;Persist Security Info=False;Data Source=.\\SQLEXPRESS;Initial Catalog=OverSurgery;";
+        static string c = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\LENOVO\Documents\OverSurgery.mdf; Integrated Security = True; Connect Timeout = 30";
+        SqlConnection conn = new SqlConnection(c);
         Log log = new Log();
 
         //retrive data
@@ -28,7 +31,6 @@ namespace SEclinicSystem
         {
             try
             {
-
                 using (SqlConnection conn = new SqlConnection(c))
                 {
                     if (conn.State == ConnectionState.Closed)
@@ -62,6 +64,42 @@ namespace SEclinicSystem
             }
             finally
             { }
+        }
+
+        //connect database
+        public string connect()
+        {
+            conn = new SqlConnection(c);
+
+            try
+            {
+                conn.Open();
+                //Perform database operation
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+
+            return "Done";
+        }
+
+        //close connection
+        public void closeConnection()
+        {
+            using (conn)
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        //retrieve connection
+        public SqlConnection getConn()
+        {
+            return conn;
         }
 
         //retrieve count data
@@ -107,7 +145,7 @@ namespace SEclinicSystem
         //write data
         public int WriteData(string query)
         {
-           
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(c))
@@ -148,17 +186,29 @@ namespace SEclinicSystem
 
         }
 
-        private void checkAndPrintResult()
-        {
 
+
+        public bool login(string loginID, string password)
+        {
+            result = getLocalSQLDataCount("SELECT* FROM login where username = '" + loginID + "' AND password = '" + password + "'");
+
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
-        private void extendPrinscription()
+        public Staff credential(string id)
         {
 
+            dtResult = getLocalSQLData("SELECT * FROM login INNER JOIN Staff on login.staffID = Staff.staffID WHERE login.username = '" + id + "'");
+            staff.StaffID = dtResult.Rows[0]["staffID"].ToString();
+            staff.FullName = dtResult.Rows[0]["name"].ToString();
+            return staff;
         }
+
+
     }
-
-
 }
 

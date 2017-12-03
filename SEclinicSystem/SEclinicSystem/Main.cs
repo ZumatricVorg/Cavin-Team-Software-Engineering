@@ -44,7 +44,6 @@ namespace SEclinicSystem
 
             }
 
-
         }
 
         private void logoutBtn_Click(object sender, EventArgs e)
@@ -56,7 +55,6 @@ namespace SEclinicSystem
 
         private void Main_Load(object sender, EventArgs e)
         {
-
         }
 
         private void SearchPatient_Click(object sender, EventArgs e)
@@ -78,3 +76,4 @@ namespace SEclinicSystem
         }
     }
 }
+

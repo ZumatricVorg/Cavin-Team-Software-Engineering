@@ -44,15 +44,19 @@
             this.lblAddress = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnGoBack = new System.Windows.Forms.Button();
-            this.btnUpdateDetails = new System.Windows.Forms.Button();
             this.lblGender = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.createApt = new System.Windows.Forms.Button();
+            this.btnSearchReport = new System.Windows.Forms.Button();
+            this.btnNewReport = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnUpdateDetails = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(93, 58);
+            this.monthCalendar1.Location = new System.Drawing.Point(16, 83);
             this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 0;
@@ -229,17 +233,6 @@
             this.btnGoBack.UseVisualStyleBackColor = true;
             this.btnGoBack.Click += new System.EventHandler(this.btnGoBack_Click);
             // 
-            // btnUpdateDetails
-            // 
-            this.btnUpdateDetails.Location = new System.Drawing.Point(577, 10);
-            this.btnUpdateDetails.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnUpdateDetails.Name = "btnUpdateDetails";
-            this.btnUpdateDetails.Size = new System.Drawing.Size(102, 28);
-            this.btnUpdateDetails.TabIndex = 16;
-            this.btnUpdateDetails.Text = "Update Details";
-            this.btnUpdateDetails.UseVisualStyleBackColor = true;
-            this.btnUpdateDetails.Click += new System.EventHandler(this.btnUpdateDetails_Click);
-            // 
             // lblGender
             // 
             this.lblGender.AutoSize = true;
@@ -266,23 +259,82 @@
             // createApt
             // 
             this.createApt.Enabled = false;
-            this.createApt.Location = new System.Drawing.Point(16, 386);
+            this.createApt.Location = new System.Drawing.Point(12, 310);
+            this.createApt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.createApt.Name = "createApt";
-            this.createApt.Size = new System.Drawing.Size(120, 23);
+            this.createApt.Size = new System.Drawing.Size(141, 23);
             this.createApt.TabIndex = 19;
             this.createApt.Text = "Create Appointment";
             this.createApt.UseVisualStyleBackColor = true;
             this.createApt.Click += new System.EventHandler(this.createApt_Click);
+            // 
+            // btnSearchReport
+            // 
+            this.btnSearchReport.Location = new System.Drawing.Point(577, 370);
+            this.btnSearchReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearchReport.Name = "btnSearchReport";
+            this.btnSearchReport.Size = new System.Drawing.Size(109, 28);
+            this.btnSearchReport.TabIndex = 19;
+            this.btnSearchReport.Text = "Search Report";
+            this.btnSearchReport.UseVisualStyleBackColor = true;
+            this.btnSearchReport.Click += new System.EventHandler(this.btnSearchReport_Click);
+            // 
+            // btnNewReport
+            // 
+            this.btnNewReport.Location = new System.Drawing.Point(440, 370);
+            this.btnNewReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNewReport.Name = "btnNewReport";
+            this.btnNewReport.Size = new System.Drawing.Size(113, 28);
+            this.btnNewReport.TabIndex = 20;
+            this.btnNewReport.Text = "New Report";
+            this.btnNewReport.UseVisualStyleBackColor = true;
+            this.btnNewReport.Click += new System.EventHandler(this.btnNewReport_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(16, 370);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(113, 28);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Search Prescription";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(146, 370);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(113, 28);
+            this.button2.TabIndex = 22;
+            this.button2.Text = "Add Prescription";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnUpdateDetails
+            // 
+            this.btnUpdateDetails.Location = new System.Drawing.Point(168, 310);
+            this.btnUpdateDetails.Name = "btnUpdateDetails";
+            this.btnUpdateDetails.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateDetails.TabIndex = 23;
+            this.btnUpdateDetails.Text = "Update";
+            this.btnUpdateDetails.UseVisualStyleBackColor = true;
+            this.btnUpdateDetails.Click += new System.EventHandler(this.btnUpdateDetails_Click_1);
             // 
             // PatientMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 421);
+            this.Controls.Add(this.btnUpdateDetails);
             this.Controls.Add(this.createApt);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnNewReport);
+            this.Controls.Add(this.btnSearchReport);
             this.Controls.Add(this.lblGender);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.btnUpdateDetails);
             this.Controls.Add(this.btnGoBack);
             this.Controls.Add(this.lblAddress);
             this.Controls.Add(this.label8);
@@ -299,7 +351,7 @@
             this.Controls.Add(this.lblPatientID);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.monthCalendar1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PatientMain";
             this.Text = "PatientMain";
             this.ResumeLayout(false);
@@ -325,9 +377,13 @@
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnGoBack;
-        private System.Windows.Forms.Button btnUpdateDetails;
         private System.Windows.Forms.Label lblGender;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button createApt;
+        private System.Windows.Forms.Button btnSearchReport;
+        private System.Windows.Forms.Button btnNewReport;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnUpdateDetails;
     }
 }

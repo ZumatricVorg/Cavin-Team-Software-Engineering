@@ -46,13 +46,12 @@ namespace SEclinicSystem
                     if (result == "Yes")
                     {                        
                         this.Hide();
-                        var PatientMain = new PatientMain();
+                        var PatientMain = new PatientMain(patient);
                         PatientMain.Show();
                     }
                     else if (result == "No")
                     {
                         MessageBox.Show("Patient Not Found");
-                        ResetForm();
 
                     }
                 }
@@ -72,14 +71,13 @@ namespace SEclinicSystem
                     if (result == "Yes")
                     {                                 
                         this.Hide();
-                        var PatientMain = new PatientMain();
+
+                        var PatientMain = new PatientMain(patient);
                         PatientMain.Show();
                     }
                     else if (result == "No")
                     {
                         MessageBox.Show("Patient Not Found");
-                        ResetForm();
-
                     }
                 }
             }            
@@ -92,20 +90,18 @@ namespace SEclinicSystem
                     patient.Name = txtPatientName.Text;
                     patient.DOB1 = new DateTime();
                     patient.Address = txtAddress.Text.Replace(Environment.NewLine, "\\n");
-
                     result = ph.searchPatient(patient);
                     
                     if (result == "Yes")
                     {
                         this.Hide();
-                        var PatientMain = new PatientMain();
+
+                        var PatientMain = new PatientMain(patient);
                         PatientMain.Show();
                     }
                     else if (result == "No")
                     {
                         MessageBox.Show("Patient Not Found");
-                        ResetForm();
-
                     }
                 }
                 

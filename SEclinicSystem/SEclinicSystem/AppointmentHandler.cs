@@ -30,9 +30,11 @@ namespace SEclinicSystem
         }
 
         public bool change()
+
         {
             return true;
         }
+
 
         public int check(string id, Appointment app)
         {          
@@ -71,6 +73,7 @@ namespace SEclinicSystem
         {
            dbCon.getLocalSQLData("UPDATE Appointment SET status = 'completed' WHERE status = 'pending'"
                                  +" AND startTime +20 minutes < now()");
+
 
         }
     }

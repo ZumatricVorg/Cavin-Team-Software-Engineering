@@ -39,10 +39,10 @@ namespace SEclinicSystem
 
             foreach (DataRow row in dtResult.Rows)
             {
-                gpName.Items.Add(row["name"].ToString());             
-            }       
+                gpName.Items.Add(row["name"].ToString());
+            }
 
-            gpName.SelectedIndex=0;
+            gpName.SelectedIndex = 0;
         }
 
         public void fillTime()
@@ -55,6 +55,7 @@ namespace SEclinicSystem
             foreach (var time in clockQuery)
                 timeList.Items.Add(time.ToString("hh:mm tt"));
             timeList.SelectedIndex = 0;
+
         }
 
         public void fillRemark()
@@ -101,6 +102,5 @@ namespace SEclinicSystem
             }
         }
 
-      
     }
 }

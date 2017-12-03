@@ -21,7 +21,8 @@ namespace SEclinicSystem
                 if (result != null)
                 {
                     if (result.Rows.Count > 0)
-                    {                        
+                    {   
+
                         return "Yes";
                     }
                     else
@@ -34,6 +35,7 @@ namespace SEclinicSystem
                     return "No";
                 }
             }
+
             else if (patient.Name != "" && patient.DOB1 != new DateTime())
             {
                 //filter with name and dateOfBirth
@@ -91,6 +93,7 @@ namespace SEclinicSystem
             if (patient.Name != "" && patient.DOB1 != new DateTime())
             {
                 DataTable result = run.getLocalSQLData(@"SELECT top 1 [patientID] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + patient.DOB1 + "' and name ='" + patient.Name + "'order by patientID asc");
+
                 if (result != null)
                 {
                     if (result.Rows.Count > 0)
@@ -156,6 +159,5 @@ namespace SEclinicSystem
             }
 
         }
-      
     }
 }
