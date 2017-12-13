@@ -156,6 +156,7 @@
     <Compile Include="ReportViewPrint.Designer.cs">
       <DependentUpon>ReportViewPrint.cs</DependentUpon>
     </Compile>
+    <Compile Include="SingletonClass.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="StaffHandler.cs" />
     <Compile Include="UpdatePatient.cs">

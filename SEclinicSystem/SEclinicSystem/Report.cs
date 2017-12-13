@@ -9,17 +9,88 @@ namespace SEclinicSystem
     public class Report
     {
         private string reportID;
-        private Staff staff;
-        private Patient patient;
-        private Appointment appointment;
+        private Staff staff = new Staff();
+        private Patient patient = new Patient();
+        private Appointment appointment = new Appointment();
         private string description;
         private string remarks;
 
-        public string ReportID { get => reportID; set => reportID = value; }
-        public Patient Patient { get => patient; set => patient = value; }
-        public Appointment Appointment { get => appointment; set => appointment = value; }
-        public string Description { get => description; set => description = value; }
-        public string Remarks { get => remarks; set => remarks = value; }
-        internal Staff Staff { get => staff; set => staff = value; }
+        public string ReportID
+        {
+            get
+            {
+                return reportID;
+            }
+
+            set
+            {
+                reportID = value;
+            }
+        }
+
+        public Staff Staff
+        {
+            get
+            {
+                return staff;
+            }
+
+            set
+            {
+                staff = value;
+            }
+        }
+
+        public Patient Patient
+        {
+            get
+            {
+                return patient;
+            }
+
+            set
+            {
+                patient = value;
+            }
+        }
+
+        public Appointment Appointment
+        {
+            get
+            {
+                return appointment;
+            }
+
+            set
+            {
+                appointment = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+
+            set
+            {
+                description = value;
+            }
+        }
+
+        public string Remarks
+        {
+            get
+            {
+                return remarks;
+            }
+
+            set
+            {
+                remarks = value;
+            }
+        }
     }
 }

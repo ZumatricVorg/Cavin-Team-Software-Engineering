@@ -10,6 +10,8 @@ namespace SEclinicSystem
     {
         private string fullName;
         private string staffID;
+        private string image;
+        private string position;
 
         public string FullName
         {
@@ -34,6 +36,32 @@ namespace SEclinicSystem
             set
             {
                 staffID = value;
+            }
+        }
+
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+
+            set
+            {
+                image = value;
+            }
+        }
+
+        public string Position
+        {
+            get
+            {
+                return position;
+            }
+
+            set
+            {
+                position = value;
             }
         }
     }

@@ -26,7 +26,7 @@ namespace SEclinicSystem
 
         private void setReport()
         {
-            DataTable dt = run.getLocalSQLData("SELECT [patientName] FROM [Patient] WHERE patientId = '" + r.Patient.PatientID + "' ORDER BY [patientID] ASC");
+            DataTable dt = run.getLocalSQLData("SELECT [name] as patientName FROM [Patient] WHERE patientID = '" + r.Patient.PatientID + "' ORDER BY [patientID] ASC");
 
             if (dt.Rows.Count > 0)
             {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SEclinicSystem
 {
-    class ReceptionistHandler
+    public class ReceptionistHandler
     {
         Int32 result;
         Staff staff = new Staff();
@@ -16,7 +16,7 @@ namespace SEclinicSystem
 
         public bool login(Receptionist receptionist)
         {
-            result = run.getLocalSQLDataCount("SELECT* FROM login where username = '" + receptionist.LoginID + "' AND password = '" + receptionist.Password + "'");
+            result = run.getLocalSQLDataCount("SELECT * FROM login WHERE username = '" + receptionist.LoginID + "' AND password = '" + receptionist.Password + "'");
 
             if (result > 0)
             {
@@ -28,9 +28,16 @@ namespace SEclinicSystem
         public Staff credential(string id)
         {
 
-            dtResult = run.getLocalSQLData("SELECT * FROM login INNER JOIN Staff on login.staffID = Staff.staffID WHERE login.username = '" + id + "'");
+            dtResult = run.getLocalSQLData("SELECT * FROM login"
+            +" INNER JOIN Staff on login.staffID = Staff.staffID"
+            +" INNER JOIN StaffPosition as sp ON sp.staffID = Staff.staffID"
+            +" INNER JOIN Position as p ON p.positionID = sp.positionID"
+            +" WHERE login.username ='" + id + "'");
+           
             staff.StaffID = dtResult.Rows[0]["staffID"].ToString();
             staff.FullName = dtResult.Rows[0]["name"].ToString();
+            staff.Image = dtResult.Rows[0]["image"].ToString();
+            staff.Position = dtResult.Rows[0]["positionName"].ToString();
             return staff;
 
         }

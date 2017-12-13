@@ -73,7 +73,7 @@ namespace SEclinicSystem
             }
             else if(txtPatientName.Text.Trim() != "")
             {
-                Regex emp1 = new Regex("^[a-z-A-Z]+$");
+                Regex emp1 = new Regex("^[\\sa-z-A-Z]+$");
 
                 if (!emp1.IsMatch(txtPatientName.Text))
                 {
@@ -83,7 +83,7 @@ namespace SEclinicSystem
                 }
             }
             //NRIC validation
-            else if (txtNRIC1.Text.Trim() == "")
+             if (txtNRIC1.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's NRIC column 1.");
                 txtNRIC1.Focus();
@@ -153,7 +153,7 @@ namespace SEclinicSystem
                 }
             }
             // Date of birth validation
-            else if (dtpDOB.Value.Date > DateTime.Now.Date)
+             if (dtpDOB.Value.Date > DateTime.Now.Date)
             {
                 MessageBox.Show("Invalid date.");
                 dtpDOB.Focus();
@@ -191,7 +191,7 @@ namespace SEclinicSystem
                 }                
             }
             // Email validation
-            else if (txtEmail.Text.Trim() == "")
+             if (txtEmail.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's email address.");
                 txtEmail.Focus();
@@ -210,7 +210,7 @@ namespace SEclinicSystem
                 
             }
             // Address validation
-            else if (txtAddress.Text.Trim() == "")
+             if (txtAddress.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's address.");
                 txtAddress.Focus();

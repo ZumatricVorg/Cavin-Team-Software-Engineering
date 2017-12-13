@@ -23,35 +23,8 @@ namespace SEclinicSystem
             setPrescription();
             btnExtend.Visible = false;
             btnBack.Visible = false;
-            button1.Visible = true;
+            button2.Visible = true;
             dtpEndDate.Visible = false;
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DataGridView dgv = (DataGridView)sender;
-
-            if (dgv.CurrentCell.GetType() != typeof(DataGridViewCheckBoxCell))
-            {
-                DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
-                ch1 = (DataGridViewCheckBoxCell)dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[5];
-
-                if (ch1.Value == ch1.TrueValue)
-                {
-                    prescription.Medicine.MedicineID = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].ToString();
-                    prescription.Medicine.MedicineName = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[1].ToString();
-                    bool result = ph.checkPrescriptionLimit(prescription);
-
-                    if (result == false)
-                    {
-                        MessageBox.Show(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[1].ToString()+" medicine cannot be extended!");
-                        ch1.Value = ch1.FalseValue;
-                    }
-                   
-                }
-               
-            }           
-
         }
 
         //set datatabe and prescription details
@@ -60,6 +33,7 @@ namespace SEclinicSystem
             DataTable dt = ph.retrivePrescription(prescription);
 
             lblPrescriptionID.Text  = prescription.PrescriptionID;
+            label3.Text = prescription.Appointment.AppointmentID;
             lblGPName.Text = prescription.Staff.FullName;
             lblDate.Text = prescription.Appointment.Date.ToString();
 
@@ -84,9 +58,14 @@ namespace SEclinicSystem
             dataGridView1.Columns["Select"].Visible = true;
             btnExtend.Visible = true;
             btnBack.Visible = true;
-            button1.Visible = false;
+            button2.Visible = false;
+            lblEndDate.Visible = true;
             dtpEndDate.Visible = true;
+            button1.Visible = false;
 
+            DataTable dt = ph.retriveExtendPrescription(prescription);
+
+            dataGridView1.DataSource = dt;
         }
 
         //cancel extend prescription
@@ -95,8 +74,13 @@ namespace SEclinicSystem
             dataGridView1.Columns["Select"].Visible = false;
             btnExtend.Visible = false;
             btnBack.Visible = false;
-            button1.Visible = true;
+            button2.Visible = true;
             dtpEndDate.Visible = false;
+            lblEndDate.Visible = false;
+            button1.Visible = true;
+
+            DataTable dt = ph.retrivePrescription(prescription);
+            dataGridView1.DataSource = dt;
         }
 
         private void Clear()
@@ -112,23 +96,28 @@ namespace SEclinicSystem
         private void btnExtend_Click(object sender, EventArgs e)
         {
             DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
-            int rowkena = 0; 
+            int rowkena = 0;
+            int rowK = 0;
 
-            for(int i=0; i < dataGridView1.Rows.Count; i++)
+            prescription.EndDate = dtpEndDate.Value.Date;
+            rowkena = ph.addPrescription(prescription);
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                ch1 = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[5];
+                //Get the appropriate cell using index, name or whatever and cast to DataGridViewCheckBoxCell
+                DataGridViewCheckBoxCell cell = row.Cells["select"] as DataGridViewCheckBoxCell;
 
-                if (ch1.Value == ch1.TrueValue)
+                //Compare to the true value because Value isn't boolean
+                if (cell.Value == cell.TrueValue)
                 {
-                    prescription.Medicine.MedicineID = dataGridView1.Rows[i].Cells[0].ToString();
-                    prescription.EndDate = dtpEndDate.Value.Date;
-                    rowkena = ph.extendPrescription(prescription);          
-                   
+                    //The value is true
+                           prescription.Medicine.MedicineID = row.Cells[0].Value.ToString();
+                           rowK = ph.addPrescriptionMedicine(prescription);
                 }
 
             }
 
-            if (rowkena > 0)
+            if (rowkena > 0 && rowK > 0)
             {
                 MessageBox.Show("Extend prescription successfull!");
                 Clear();
@@ -148,5 +137,32 @@ namespace SEclinicSystem
             var ps = new PrescriptionSearch(prescription.Patient);
             ps.Show();
         }
+
+        ////check unlimited prescription when checked the check box
+        //private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    DataGridView dgv = (DataGridView)sender;
+
+        //    if (dgv.CurrentCell.GetType() != typeof(DataGridViewCheckBoxCell))
+        //    {
+        //        DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
+        //        ch1 = (DataGridViewCheckBoxCell)dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[5];
+
+        //        if (ch1.Value == ch1.TrueValue)
+        //        {
+        //            prescription.Medicine.MedicineID = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].ToString();
+        //            prescription.Medicine.MedicineName = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[1].ToString();
+        //            bool result = ph.checkPrescriptionLimit(prescription);
+
+        //            if (result == false)
+        //            {
+        //                MessageBox.Show(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[1].ToString() + " medicine cannot be extended!");
+        //                ch1.Value = ch1.FalseValue;
+        //            }
+
+        //        }
+
+        //    }
+        //}
     }
 }

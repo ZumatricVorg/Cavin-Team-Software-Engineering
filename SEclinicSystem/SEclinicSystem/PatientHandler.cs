@@ -7,7 +7,7 @@ using System.Data;
 
 namespace SEclinicSystem
 {
-    class PatientHandler
+   public class PatientHandler
     {
         OverSurgerySystem run = new OverSurgerySystem();
 
@@ -39,7 +39,7 @@ namespace SEclinicSystem
             else if (patient.Name != "" && patient.DOB1 != new DateTime())
             {
                 //filter with name and dateOfBirth
-                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [dateOfBirth] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + patient.DOB1.Date.ToString() + "' and name ='" + patient.Name + "'order by patientID asc");
+                DataTable result = run.getLocalSQLData(@"SELECT top 1 [patientID],[name], [dateOfBirth] FROM [Patient] a with(nolock)  where dateOfBirth  ='" + patient.DOB1.Date.ToString() + "' and name ='" + patient.Name + "'order by patientID asc");
 
                 if (result != null)
                 {
@@ -61,7 +61,7 @@ namespace SEclinicSystem
             else if (patient.Name != "" && patient.Address != "")
             {
                 //filter with name and address
-                DataTable result = run.getLocalSQLData(@"SELECT top 1 [name], [address] FROM [Patient] a with(nolock)  where address like '%" + patient.Address + "%' and name ='" + patient.Name + "'order by patientID asc");
+                DataTable result = run.getLocalSQLData(@"SELECT top 1 [patientID],[name], [address] FROM [Patient] a with(nolock)  where address like '%" + patient.Address + "%' and name ='" + patient.Name + "'order by patientID asc");
 
                 if (result != null)
                 {
@@ -119,7 +119,7 @@ namespace SEclinicSystem
         public string registerPatient(Patient patient)
         {            
             string ID = "";
-            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + patient.Name + "','" + patient.NRIC1 + "','" + patient.DOB1.ToString("yyyy-MM-dd") + "','" + patient.PhoneNo + "','" + patient.Email + "','" + patient.Address.Replace("'", "''").Replace("/", "//") + "','" + patient.Gender + "')";
+            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + patient.Name + "','" + patient.NRIC1 + "','" + patient.DOB1.Date.ToString("yyyy-MM-dd") + "','" + patient.PhoneNo + "','" + patient.Email + "','" + patient.Address.Replace("'", "''").Replace("/", "//") + "','" + patient.Gender + "')";
 
             int result = run.WriteData(tempQuery);
 
@@ -145,8 +145,7 @@ namespace SEclinicSystem
         public string updatePatientDetails(Patient patient)
         {
             string status = "N";
-            string tempQuery = " INSERT INTO [Patient] ([name] ,[NRIC] ,[dateOfBirth] ,[phoneNo] ,[email] ,[address], [gender]) VALUES ('" + patient.Name + "','" + patient.NRIC1 + "','" + patient.DOB1.ToString() + "','" + patient.PhoneNo + "','" + patient.Email + "','" + patient.Address.Replace("'", "''").Replace("/", "//") + "','" + patient.Gender + "' where patientId ='" + patient.PatientID + "')";
-
+            string tempQuery = " UPDATE[Patient] SET name ='" + patient.Name + "' ,NRIC = '" + patient.NRIC1 + "', dateOfBirth = '" + patient.DOB1.ToString("yyyy-MM-dd") + "', phoneNo = '" + patient.PhoneNo + "', email = '" + patient.Email + "', address = '" + patient.Address.Replace("'", "''").Replace("/", "//") + "', gender = '" + patient.Gender + "' WHERE patientID ='" + patient.PatientID+"'";
             int result = run.WriteData(tempQuery);
 
             if (result > 0)

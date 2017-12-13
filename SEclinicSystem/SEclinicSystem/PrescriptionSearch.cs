@@ -25,67 +25,6 @@ namespace SEclinicSystem
             dataGridView1.Visible = true;            
         }
 
-        //search Text Box
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            DataTable result = run.getLocalSQLData(@"select disctinct a.[prescriptionID], a.[appointmentID], b.[date], a.[staffID] FROM [Prescription] a with (nolock) left join [Appointment] with (nolock) on a.appointmentID = b.appointmentID   where patientID ='"+p.PatientID+"' AND prescriptionID LIKE '%"+ textBox1.Text +"%' order by prescriptionID asc");
-
-            if (result != null)
-            {
-                if (result.Rows.Count > 0)
-                {
-                    lblText.Visible = false;
-                    dataGridView1.Visible = true;
-
-                    int x = 0;
-                    while (x <= result.Rows.Count - 1)
-                    {
-                        DataTable pn = run.getLocalSQLData("select [patientName] FROM [Patient] where patientID = '" + p.PatientID + "' order by patientID asc");
-                        DataTable gpn = run.getLocalSQLData("select [fullName] FROM [Staff] where staffID = '" + result.Rows[x]["staffID"].ToString() + "' order by staffID asc");
-
-                        DataGridViewLinkColumn linkCell = new DataGridViewLinkColumn();
-                        linkCell.UseColumnTextForLinkValue = true;
-                        linkCell.LinkBehavior = LinkBehavior.SystemDefault;
-                        linkCell.Name = "PrescriptionID";
-                        linkCell.LinkColor = Color.Blue;
-                        linkCell.Text = result.Rows[x]["prescriptionID"].ToString();
-                        linkCell.UseColumnTextForLinkValue = true;
-
-                        dataGridView1.Rows.Add(linkCell, result.Rows[x]["date"].ToString(), pn.Rows[0]["patientName"].ToString(), gpn.Rows[0]["fullName"].ToString());
-                        x++;
-                    }                
-                    
-                }
-                else
-                {
-                    lblText.Visible = true;
-                    dataGridView1.Visible = false;
-                }
-                
-            }
-            
-        }
-
-        //link cell - click the id then will show the prescription details
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {            
-            if (e.ColumnIndex == 0)
-            {
-                prescription.PrescriptionID = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                prescription.Appointment.Date = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[1].Value;
-                prescription.Staff.FullName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-                DataTable result = run.getLocalSQLData(@"select disctinct [prescriptionID], [appointmentID], [staffID], [endDate] FROM [Prescription] a with(nolock) where patientId = '"+p.PatientID+"' AND prescriptionID = '"+ prescription.PrescriptionID +"' order by prescriptionID asc");
-                prescription.Staff.StaffID = result.Rows[0]["staffID"].ToString();
-                prescription.Appointment.AppointmentID = result.Rows[0]["appointmentID"].ToString();
-                prescription.Patient.PatientID = p.PatientID;
-                prescription.EndDate = (DateTime)result.Rows[0]["endDate"];
-
-                this.Hide();
-                var pd = new PrescriptionDetails(prescription);
-                pd.Show();
-            }
-        }
 
         //set datatable
         public void setDataGridTable()
@@ -101,6 +40,69 @@ namespace SEclinicSystem
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataTable result = run.getLocalSQLData(@"select DISTINCT a.[prescriptionID], a.[appointmentID], CONCAT(b.startDate,' ',b.startTime) as startDate,"
+                           + " a.[staffID] FROM [Prescription] as a left join [Appointment] as b on a.[appointmentID] = b.[id] where a.[patientID] = '" + p.PatientID+"' AND prescriptionID LIKE '%"+textBox1.Text+"%' order by prescriptionID asc");
+
+            if (result != null)
+            {
+                if (result.Rows.Count > 0)
+                {
+                    lblText.Visible = false;
+                    dataGridView1.Visible = true;
+
+                    int x = 0;
+                    while (x <= result.Rows.Count - 1)
+                    {
+                        DataTable pn = run.getLocalSQLData("select [name] FROM [Patient] where patientID = '" + p.PatientID + "' order by patientID asc");
+                        DataTable gpn = run.getLocalSQLData("select [name] FROM [Staff] where staffID = '" + result.Rows[x]["staffID"].ToString() + "' order by staffID asc");
+
+                        dataGridView1.Rows.Add(result.Rows[x]["prescriptionID"].ToString(), result.Rows[x]["startDate"].ToString(), pn.Rows[0]["name"].ToString(), gpn.Rows[0]["name"].ToString());
+                        x++;
+                    }
+
+                    foreach (DataGridViewRow r in dataGridView1.Rows)
+                    {
+                        DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                        linkCell.LinkBehavior = LinkBehavior.SystemDefault;
+                        linkCell.LinkColor = Color.Blue;
+                        linkCell.Value = r.Cells[0].Value;
+                        dataGridView1[0, r.Index] = linkCell;
+                    }
+
+                }
+                else
+                {
+                    lblText.Visible = true;
+                    dataGridView1.Visible = false;
+                }
+
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewLinkCell)
+            {
+                prescription.PrescriptionID = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                prescription.Appointment.Date = DateTime.Parse(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()); //DateTime.Now;
+                prescription.Staff.FullName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                DataTable result = run.getLocalSQLData(@"select distinct [prescriptionID], [appointmentID], [staffID], [endDate] FROM [Prescription] a with(nolock) where patientId = '" + p.PatientID + "' AND prescriptionID = '" + prescription.PrescriptionID + "' order by prescriptionID asc");
+                prescription.Staff.StaffID = result.Rows[0]["staffID"].ToString();
+                prescription.Appointment.AppointmentID = result.Rows[0]["appointmentID"].ToString();
+                prescription.Patient.PatientID = p.PatientID;
+                prescription.EndDate = (DateTime)result.Rows[0]["endDate"];
+
+                this.Hide();
+                var pd = new PrescriptionDetails(prescription);
+                pd.Show();
+            }
+
         }
     }
 }

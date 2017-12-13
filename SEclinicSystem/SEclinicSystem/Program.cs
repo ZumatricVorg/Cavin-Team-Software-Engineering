@@ -17,9 +17,8 @@ namespace SEclinicSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
-            //Application.Run(new PatientSearch());
-            //Application.Run(new AppointmentMain());
-            //Application.Run(new Main("1"));
+            
         }
+
     }
 }

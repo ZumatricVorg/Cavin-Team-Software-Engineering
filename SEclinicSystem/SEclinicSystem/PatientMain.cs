@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,14 +45,15 @@ namespace SEclinicSystem
                 lblAddress.Text = result.Rows[0]["address"].ToString().Replace("\r\n",Environment.NewLine);
 
                 createApt.Enabled = true;
-                              
-                p.Name = result.Rows[0]["name"].ToString();
-                p.NRIC1 = result.Rows[0]["NRIC"].ToString();
-                p.Gender = result.Rows[0]["gender"].ToString();
-                p.DOB1 = (DateTime)result.Rows[0]["dateOfBirth"];
-                p.PhoneNo = result.Rows[0]["phoneNo"].ToString();
-                p.Email = result.Rows[0]["email"].ToString();
-                p.Address = result.Rows[0]["address"].ToString().Replace("\r\n", Environment.NewLine);
+
+                this.p.PatientID = p.PatientID;
+                this.p.Name = result.Rows[0]["name"].ToString();
+                this.p.NRIC1 = result.Rows[0]["NRIC"].ToString();
+                this.p.Gender = result.Rows[0]["gender"].ToString();
+                this.p.DOB1 = Convert.ToDateTime(result.Rows[0]["dateOfBirth"]);
+                this.p.PhoneNo = result.Rows[0]["phoneNo"].ToString();
+                this.p.Email = result.Rows[0]["email"].ToString();
+                this.p.Address = result.Rows[0]["address"].ToString().Replace("\r\n", Environment.NewLine);
             }
         }
 
@@ -70,9 +72,8 @@ namespace SEclinicSystem
         }
 
         private void createApt_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            AppointmentMain aptmain = new AppointmentMain(p.PatientID);
+        {          
+            AppointmentMain aptmain = new AppointmentMain(p.PatientID,"");
             aptmain.ShowDialog();
         }
 

@@ -17,6 +17,12 @@ namespace SEclinicSystem
         OverSurgerySystem run = new OverSurgerySystem();
         Prescription prescription = new Prescription();
         PrescriptionHandler ph = new PrescriptionHandler();
+        DataTable dtResult = new DataTable();
+        StaffHandler sHlder = new StaffHandler();
+        DataGridViewCheckBoxColumn checkMedicine = new DataGridViewCheckBoxColumn();
+        AutoCompleteStringCollection MyCollection = new AutoCompleteStringCollection();
+        AppointmentHandler aHlder = new AppointmentHandler();
+
 
         public PrescriptionAddNew(Patient patient)
         {
@@ -25,39 +31,60 @@ namespace SEclinicSystem
             clearList();
             setPatientName();
             setMedicineList();
+            dtResult = sHlder.selectAllDP();
+
+            if (dtResult == null)
+            {
+                return;
+            }
+            else
+            {
+                foreach (DataRow row in dtResult.Rows)
+                {
+                    MyCollection.Add(row["name"].ToString());
+                }
+
+                txtGPName.AutoCompleteCustomSource = MyCollection;
+            }
+            allApt();
         }
 
         private void PrescriptionAddNew_Load(object sender, EventArgs e)
         {                        
-            string resp = run.connect();
-            AutoCompleteStringCollection gpNameCollection = new AutoCompleteStringCollection();
-
-            if (resp == "Done")
-            {
-                SqlCommand cmd = new SqlCommand(@"select [fullName] FROM [Staff] order by fullName asc", run.getConn());
-                SqlDataReader reader = cmd.ExecuteReader();                
-                while (reader.Read())
-                {
-                    gpNameCollection.Add(reader.GetString(0));
-                }                
-                txtGPName.AutoCompleteCustomSource = gpNameCollection;
-
-                run.closeConnection();
-            }         
-
+          
          }
 
+        public void allApt()
+        {
+            dtResult = aHlder.checkAllApt();
+
+            if (dtResult == null)
+            {
+                return;
+            }
+            else
+            {
+                foreach (DataRow row in dtResult.Rows)
+                {
+                    MyCollection.Add(row["Id"].ToString());
+                }
+
+                txtAppointmentID.AutoCompleteCustomSource = MyCollection;
+            }
+
+        }
+    
         //set the medicine datagridview
         private void setMedicineList()
         {         
-            DataTable medicineDT = run.getLocalSQLData("SELECT [medicineID], [medicineName], [dosage], [consumption], [description] FROM [Medicine] ORDER BY [medicineID] ASC");
+            DataTable medicineDT = run.getLocalSQLData("SELECT [medicineID], [medicineName], [dosage], [consumption], [description] FROM [Medicine] ORDER BY [medicineID] ASC ");
 
             if (medicineDT.Rows.Count > 0)
             {               
                 dataGridView1.DataSource = medicineDT;
             }
 
-            DataGridViewCheckBoxColumn checkMedicine = new DataGridViewCheckBoxColumn();
+           
             checkMedicine.Name = "select";
             checkMedicine.HeaderText = "Select";
             checkMedicine.Width = 50;
@@ -71,6 +98,7 @@ namespace SEclinicSystem
         private void btnCreatePrescription_Click(object sender, EventArgs e)
         {
             int rowkena = 0;
+            int rowK = 0;
 
             if (!checkValidation())
             {
@@ -79,23 +107,33 @@ namespace SEclinicSystem
             
             prescription.Appointment.AppointmentID = txtAppointmentID.Text.ToString();
 
-            DataTable gp = run.getLocalSQLData("SELECT [staffID] FROM [Staff] WHERE [fullName] = '" + txtGPName.Text.ToString() + "' ORDER BY [staffID] ASC");
+            DataTable gp = run.getLocalSQLData("SELECT [staffID] FROM [Staff] WHERE [name] = '" + txtGPName.Text.ToString() + "' ORDER BY [staffID] ASC");
             prescription.Staff.StaffID = gp.Rows[0]["staffID"].ToString();
 
             prescription.EndDate = dtpEndDate.Value.Date;
 
-            for (int j = 0; j < dataGridView1.Rows.Count; j++)
+            rowkena = ph.addPrescription(prescription);
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
+                //Get the appropriate cell using index, name or whatever and cast to DataGridViewCheckBoxCell
+                DataGridViewCheckBoxCell cell = row.Cells["select"] as DataGridViewCheckBoxCell;
 
-                if (Convert.ToBoolean(dataGridView1.Rows[j].Cells[5].Value) == true)
+                //Compare to the true value because Value isn't boolean
+                if (cell.Value == cell.TrueValue)
                 {
-                    prescription.Medicine.MedicineID = dataGridView1.Rows[j].Cells[0].Value.ToString();
-                    rowkena = ph.addPrescription(prescription);
+                    //The value is true
+                    prescription.Medicine.MedicineID = row.Cells["medicineID"].Value.ToString();
+                    rowK = ph.addPrescriptionMedicine(prescription);
                 }            
-                
+         
             }
+                                                          
+                //}            
+                
+            //}
 
-            if (rowkena > 0)
+            if (rowK > 0 && rowkena > 0)
             {
                 MessageBox.Show("New prescription is successfully created!");
                 clearList();
@@ -122,7 +160,7 @@ namespace SEclinicSystem
             }
             else if (txtGPName.Text.Trim() != "")
             {
-                Regex emp1 = new Regex("^[a-z-A-Z]+$");
+                Regex emp1 = new Regex("^[\\sa-z-A-Z]+$");
 
                 if (!emp1.IsMatch(txtGPName.Text))
                 {
@@ -132,32 +170,34 @@ namespace SEclinicSystem
                 }
             }           
             // Appointment ID validation
-            else if (txtAppointmentID.Text.Trim() == "")
+             if (txtAppointmentID.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up apponintment ID.");
                 txtAppointmentID.Focus();
                 return false;
             }
+
             // End date validation
-            else if(dtpEndDate.Value.Date <= DateTime.Now.Date)
+            if(dtpEndDate.Value.Date <= DateTime.Now.Date)
             {
                 MessageBox.Show("Invalid date!");
                 dtpEndDate.Focus();
                 return false;
             }
             //must have one checkbox checked
-            else 
+            else
             {
                 int checkedBox = 0;
 
-                DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
-
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    ch1 = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[5];
+                    //Get the appropriate cell using index, name or whatever and cast to DataGridViewCheckBoxCell
+                    DataGridViewCheckBoxCell cell = row.Cells["select"] as DataGridViewCheckBoxCell;
 
-                    if (ch1.Value == ch1.TrueValue)
+                    //Compare to the true value because Value isn't boolean
+                    if (cell.Value == cell.TrueValue)
                     {
+                        //The value is true
                         checkedBox = checkedBox + 1;
                     }
 
@@ -165,12 +205,14 @@ namespace SEclinicSystem
 
                 if (checkedBox == 0)
                 {
+                    MessageBox.Show("Please select atleast one medicine!");
                     return false;
                 }
                 else if (checkedBox > 0)
                 {
                     return validation;
-                }
+                }            
+
             }
 
             return validation;
@@ -185,15 +227,17 @@ namespace SEclinicSystem
             
             if(dataGridView1 != null)
             {
-                DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
-
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+               
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    ch1 = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[5];
+                    //Get the appropriate cell using index, name or whatever and cast to DataGridViewCheckBoxCell
+                    DataGridViewCheckBoxCell cell = row.Cells["select"] as DataGridViewCheckBoxCell;
 
-                    if (ch1.Value == ch1.TrueValue)
+                    //Compare to the true value because Value isn't boolean
+                    if (cell.Value == cell.TrueValue)
                     {
-                        ch1.Value = ch1.FalseValue;
+                        //The value is true
+                        cell.Value = cell.FalseValue;
                     }
 
                 }
@@ -203,11 +247,11 @@ namespace SEclinicSystem
         //set txtPatientName textbox value (patient's name)
         private void setPatientName()
         {
-            DataTable dt = run.getLocalSQLData("SELECT [patientName] FROM [Patient] WHERE patientId = '"+prescription.Patient.PatientID+"' ORDER BY [patientID] ASC");
+            DataTable dt = run.getLocalSQLData("SELECT [name] FROM [Patient] WHERE patientId = '"+prescription.Patient.PatientID+"' ORDER BY [patientID] ASC");
 
             if (dt.Rows.Count > 0)
             {
-                prescription.Patient.Name = dt.Rows[0]["patientName"].ToString();
+                prescription.Patient.Name = dt.Rows[0]["name"].ToString();
                 txtPatientName.Text = prescription.Patient.Name;
             }
             
@@ -217,6 +261,11 @@ namespace SEclinicSystem
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void txtGPName_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -18,19 +18,74 @@ namespace SEclinicSystem
         AppointmentHandler aHdler = new AppointmentHandler();
         StaffHandler sHlder = new StaffHandler();
         DataTable dtResult = new DataTable();
+        Staff staff = new Staff();
 
         string message = "";
         int count = 0;
         Patient patient = new Patient();
 
-        public AppointmentMain(string pID)
+        public AppointmentMain(string pID,string aID)
         {
-            patient.PatientID = pID;
             InitializeComponent();
-            gpNames();
-            fillTime();
-            fillRemark();
 
+            if (aID == "")
+            {
+                nurseName();
+                patient.PatientID = pID;
+                gpNames();
+                fillRemark();
+                upDateApt.Visible = false;
+            }
+            else if (pID == "")
+            {
+                nurseBox.Enabled = false;        
+                gpName.Enabled = false;
+                createApt.Visible = false;
+                label3.Visible = false;
+                label5.Visible = false;
+                remark.Visible = false;
+                msgBox.Visible = false;
+                app.AppointmentID = aID;
+                aptGpNurse(aID);
+            }
+            fillTime();
+         
+        }
+
+        public void nurseName()
+        {
+            dtResult = sHlder.selectAllNurse();
+
+            foreach (DataRow row in dtResult.Rows)
+            {
+                nurseBox.Items.Add(row["name"].ToString());
+            }
+
+            if (dtResult.Rows.Count > 0)
+                nurseBox.SelectedIndex = 0;
+        }
+
+        public void aptGpNurse(string id)
+        {
+            dtResult = aHdler.aptGP(id);
+
+            foreach (DataRow row in dtResult.Rows)
+            {
+                gpName.Items.Add(row["name"].ToString());
+            }
+
+            if (dtResult.Rows.Count > 0)
+                gpName.SelectedIndex = 0;
+
+            dtResult = sHlder.selectAllNurse();
+
+            foreach (DataRow row in dtResult.Rows)
+            {
+                nurseBox.Items.Add(row["name"].ToString());
+            }
+
+            if (dtResult.Rows.Count > 0)
+                nurseBox.SelectedIndex = 0;
         }
 
         public void gpNames()
@@ -42,6 +97,7 @@ namespace SEclinicSystem
                 gpName.Items.Add(row["name"].ToString());
             }
 
+            if(dtResult.Rows.Count > 0)
             gpName.SelectedIndex = 0;
         }
 
@@ -49,8 +105,8 @@ namespace SEclinicSystem
         {
 
             var start = DateTime.ParseExact("09:00", "HH:mm",CultureInfo.InvariantCulture);
-            var clockQuery = from offset in Enumerable.Range(0,37)
-                             select start.AddMinutes(20 * offset);
+            var clockQuery = from offset in Enumerable.Range(0,25)
+                             select start.AddMinutes(30 * offset);
 
             foreach (var time in clockQuery)
                 timeList.Items.Add(time.ToString("hh:mm tt"));
@@ -72,6 +128,7 @@ namespace SEclinicSystem
             app.Date = date.Value.Date;
             app.Time = DateTime.Parse(timeList.SelectedItem.ToString());
             app.Remark = remark.SelectedItem.ToString();
+            app.Msg = msgBox.Text;
             staff2.StaffID = dtResult.Rows[gpName.SelectedIndex]["staffID"].ToString();
             DateTime aptTime = DateTime.Parse(app.Date.ToString("dd/MM/yyyy") + " " + app.Time.ToString("hh:mm tt"));
 
@@ -100,7 +157,53 @@ namespace SEclinicSystem
                     MessageBox.Show(message);
                 }
             }
+            this.Close();           
         }
 
+        private void remark_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (remark.SelectedIndex == 2)
+            {
+                msgBox.Enabled = true;
+            }else
+            {
+                msgBox.Enabled = false;
+                this.app.Msg = "";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void upDateApt_Click(object sender, EventArgs e)
+        {
+             Staff staff2 = new Staff();
+            app.Date = date.Value.Date;
+            app.Time = DateTime.Parse(timeList.SelectedItem.ToString());
+            staff2.StaffID = dtResult.Rows[gpName.SelectedIndex]["staffID"].ToString();
+            DateTime aptTime = DateTime.Parse(app.Date.ToString("dd/MM/yyyy") + " " + app.Time.ToString("hh:mm tt"));
+
+            if (aptTime < DateTime.Now)
+            {
+                MessageBox.Show("Pass Time or Date is not allowed");
+                return;
+            }
+    
+                count = aHdler.check(staff2.StaffID, app);
+                if(count > 0)
+                {
+                    MessageBox.Show("Appointment Clash! Please select another Date");
+                    return;
+                }else
+                {
+                    message = aHdler.change(app);
+                    MessageBox.Show(message);
+                }
+            
+            this.Close();           
+
+        }
     }
 }

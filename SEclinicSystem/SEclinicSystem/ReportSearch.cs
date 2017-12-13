@@ -25,71 +25,6 @@ namespace SEclinicSystem
             dataGridView1.Visible = true;
         }
 
-        //search ReportID
-        private void txtReportID_TextChanged(object sender, EventArgs e)
-        {
-            DataTable result = run.getLocalSQLData(@"select a.[reportID], a.[appointmentID], b.[date], a.[staffID] FROM [Report] a with (nolock) left join [Appointment] with (nolock) on a.appointmentID = b.appointmentID   where patientID ='" + p.PatientID + "' AND reportID LIKE '%" + txtReportID.Text + "%' order by reportID asc");
-
-            if (result != null)
-            {
-                if (result.Rows.Count > 0)
-                {
-                    lblText.Visible = false;
-                    dataGridView1.Visible = true;
-
-                    int x = 0;
-                    while (x <= result.Rows.Count - 1)
-                    {
-                        DataTable pn = run.getLocalSQLData("select [patientName] FROM [Patient] where patientID = '" + p.PatientID + "' order by patientID asc");
-                        DataTable gpn = run.getLocalSQLData("select [staffName] FROM [Staff] where staffID = '" + result.Rows[x]["staffID"].ToString() + "' order by staffID asc");
-
-                        DataGridViewLinkColumn linkCell = new DataGridViewLinkColumn();
-                        linkCell.UseColumnTextForLinkValue = true;
-                        linkCell.LinkBehavior = LinkBehavior.SystemDefault;
-                        linkCell.Name = "ReportID";
-                        linkCell.LinkColor = Color.Blue;
-                        linkCell.Text = result.Rows[x]["reportID"].ToString();
-                        linkCell.UseColumnTextForLinkValue = true;
-
-                        dataGridView1.Rows.Add(linkCell, result.Rows[x]["date"].ToString(), pn.Rows[0]["patientName"].ToString(), gpn.Rows[0]["staffName"].ToString());
-                        x++;
-                    }
-
-                }
-                else
-                {
-                    lblText.Visible = true;
-                    dataGridView1.Visible = false;
-                }
-
-            }
-
-        }
-
-        //link cell - click the id then will show the report
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0)
-            {
-                report.ReportID = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                report.Appointment.Date = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[1].Value;
-                report.Staff.FullName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-                DataTable result = run.getLocalSQLData(@"select [reportID], [appointmentID], [staffID], [description], [remarks] FROM [Report] a with(nolock) where patientId = '" + p.PatientID + "' AND reportID = '" + report.ReportID + "' order by reportID asc");
-                report.Staff.StaffID = result.Rows[0]["staffID"].ToString();
-                report.Appointment.AppointmentID = result.Rows[0]["appointmentID"].ToString();
-                report.Description = result.Rows[0]["description"].ToString();
-                report.Remarks = result.Rows[0]["remarks"].ToString();
-                report.Patient.PatientID = p.PatientID;
-
-
-                this.Hide();
-                var rvp = new ReportViewPrint(report);
-                rvp.Show();
-            }
-        }
-
-        //set datatable
         public void setDataGridTable()
         {
             dataGridView1.Columns.Add("reportID", "Report ID");
@@ -103,6 +38,77 @@ namespace SEclinicSystem
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        //click search
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataTable result = run.getLocalSQLData(@"select r.[reportID], r.[appointmentID], CONCAT(b.startDate,' ',b.startTime) as startDate, r.[staffID] FROM [Report] as r with (nolock) left join [Appointment] as b with (nolock) on r.appointmentID = b.Id  where r.patientID ='" + p.PatientID + "' AND reportID LIKE '%" + txtReportID.Text + "%' order by reportID asc");
+
+            if (result != null)
+            {
+                if (result.Rows.Count > 0)
+                {
+                    lblText.Visible = false;
+                    dataGridView1.Visible = true;
+
+                    int x = 0;
+                    while (x <= result.Rows.Count - 1)
+                    {
+                        DataTable pn = run.getLocalSQLData("select [name] FROM [Patient] where patientID = '" + p.PatientID + "' order by patientID asc");
+                        DataTable gpn = run.getLocalSQLData("select [name] FROM [Staff] where staffID = '" + result.Rows[x]["staffID"].ToString() + "' order by staffID asc");
+
+
+                        dataGridView1.Rows.Add(result.Rows[x]["reportID"].ToString(), result.Rows[x]["startDate"].ToString(), pn.Rows[0]["name"].ToString(), gpn.Rows[0]["name"].ToString());
+                        x++;
+                    }
+
+                    foreach (DataGridViewRow r in dataGridView1.Rows)
+                    {
+                        DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                        linkCell.LinkBehavior = LinkBehavior.SystemDefault;
+                        linkCell.LinkColor = Color.Blue;
+                        linkCell.Value = r.Cells[0].Value;
+                        dataGridView1[0, r.Index] = linkCell;
+                    }
+
+                }
+                else
+                {
+                    lblText.Visible = true;
+                    dataGridView1.Visible = false;
+                }
+
+            }
+        }
+
+        private void btnBack_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewLinkCell)
+            {
+                report.ReportID = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+               report.Appointment.Date = DateTime.Parse(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+                report.Staff.FullName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                DataTable result = run.getLocalSQLData(@"select [reportID], [appointmentID], [staffID], [description], [remarks] FROM [Report] a with(nolock) where patientId = '" + p.PatientID + "' AND reportID = '" + report.ReportID + "' order by reportID asc");
+                report.Staff.StaffID = result.Rows[0]["staffID"].ToString();
+                report.Appointment.AppointmentID = result.Rows[0]["appointmentID"].ToString();
+                report.Description = result.Rows[0]["description"].ToString();
+                report.Remarks = result.Rows[0]["remarks"].ToString();
+                report.Patient.PatientID = p.PatientID;
+
+
+                this.Hide();
+                var rvp = new ReportViewPrint(report);
+                rvp.Show();
+
+            }
         }
     }
 }

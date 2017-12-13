@@ -21,13 +21,11 @@ namespace SEclinicSystem
         {
             InitializeComponent();
             p = patient;
-            Clear();
-
-            ddlGender.Items.Clear();
+                 
             ddlGender.Items.Insert(0, "- Select a gender -");
             ddlGender.Items.Insert(1, "Male");
             ddlGender.Items.Insert(2, "Female");
-
+            Clear();
             setValue();
         }
 
@@ -44,7 +42,7 @@ namespace SEclinicSystem
             p.PhoneNo = txtPhoneNo.Text;
             p.Email = txtEmail.Text;
             p.Address = txtAddress.Text.Replace(Environment.NewLine, "\\n");
-            p.Gender = ddlGender.SelectedValue.ToString();
+            p.Gender = ddlGender.SelectedItem.ToString();
 
             string result = ph.updatePatientDetails(p); 
 
@@ -68,7 +66,7 @@ namespace SEclinicSystem
             txtNRIC3.Text = nricArray[2];               
                 
             ddlGender.SelectedIndex = ddlGender.Items.IndexOf(p.Gender);
-            dtpDOB.Value = (DateTime)p.DOB1;
+            dtpDOB.Value = Convert.ToDateTime(p.DOB1);
             txtPhoneNo.Text = p.PhoneNo;
             txtEmail.Text = p.Email;
             txtAddress.Text = p.Address;            
@@ -87,7 +85,7 @@ namespace SEclinicSystem
             }
             else if (txtPatientName.Text.Trim() != "")
             {
-                Regex emp1 = new Regex("^[a-z-A-Z]+$");
+                Regex emp1 = new Regex("^[\\sa-z-A-Z]+$");
 
                 if (!emp1.IsMatch(txtPatientName.Text))
                 {
@@ -97,7 +95,7 @@ namespace SEclinicSystem
                 }
             }
             //NRIC validation
-            else if (txtNRIC1.Text.Trim() == "")
+             if (txtNRIC1.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's NRIC column 1.");
                 txtNRIC1.Focus();
@@ -167,14 +165,14 @@ namespace SEclinicSystem
                 }
             }
             // Date of birth validation
-            else if (dtpDOB.Value.Date > DateTime.Now.Date)
+             if (dtpDOB.Value.Date > DateTime.Now.Date)
             {
                 MessageBox.Show("Invalid date.");
                 dtpDOB.Focus();
                 return false;
             }
             // Gender validation
-            else if (ddlGender.SelectedIndex == 0)
+             if (ddlGender.SelectedIndex == 0)
             {
                 MessageBox.Show("Please select a patient's gender.");
                 ddlGender.Focus();
@@ -205,7 +203,7 @@ namespace SEclinicSystem
                 }
             }
             // Email validation
-            else if (txtEmail.Text.Trim() == "")
+             if (txtEmail.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's email address.");
                 txtEmail.Focus();
@@ -224,7 +222,7 @@ namespace SEclinicSystem
 
             }
             // Address validation
-            else if (txtAddress.Text.Trim() == "")
+             if (txtAddress.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up patient's address.");
                 txtAddress.Focus();
@@ -245,6 +243,11 @@ namespace SEclinicSystem
             txtPhoneNo.Text = "";
             txtEmail.Text = "";
             txtAddress.Text = "";
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

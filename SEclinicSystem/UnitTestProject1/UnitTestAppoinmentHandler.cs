@@ -30,6 +30,38 @@ namespace UnitTestProject1
             Assert.IsNotNull(resp);
         }
 
-      
+        [TestMethod]
+        public void TestBook()
+        {
+            AppointmentHandler aptHlder = new AppointmentHandler();
+            Appointment apt = new Appointment();
+
+
+            apt.Time = Convert.ToDateTime("12:00:00"); ;
+            apt.Date = Convert.ToDateTime("12/12/12");
+            apt.Remark = "Immediate";
+
+            string resp = aptHlder.book("1","2", apt);
+            Assert.AreEqual("Appointment Success registered",resp);
+        }
+
+        [TestMethod]
+        public void TestCheck()
+        {
+            AppointmentHandler aptHlder = new AppointmentHandler();
+            Appointment apt = new Appointment();
+
+
+            apt.Time = Convert.ToDateTime("12:00:00"); ;
+            apt.Date = Convert.ToDateTime("12/12/12");
+
+            int resp = aptHlder.check("2", apt);
+
+            Assert.IsNotNull(resp);
+        }
+
+
+
+
     }
 }

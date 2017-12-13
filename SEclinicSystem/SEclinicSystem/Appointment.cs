@@ -16,6 +16,7 @@ namespace SEclinicSystem
         private GeneralPractitioner gp;
         private string status;
         private string remark;
+        private string msg;
 
         public string AppointmentID
         {
@@ -105,6 +106,19 @@ namespace SEclinicSystem
             set
             {
                 remark = value;
+            }
+        }
+
+        public string Msg
+        {
+            get
+            {
+                return msg;
+            }
+
+            set
+            {
+                msg = value;
             }
         }
     }

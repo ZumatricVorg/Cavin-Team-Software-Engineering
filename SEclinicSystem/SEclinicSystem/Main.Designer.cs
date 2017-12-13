@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.staffID = new System.Windows.Forms.Label();
             this.staffName = new System.Windows.Forms.Label();
@@ -37,14 +39,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.searchAptBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.delApt = new System.Windows.Forms.Button();
+            this.upDateApt = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.ImageLocation = "C:\\Users\\LENOVO\\Desktop\\ARU\\Software Engineer\\Cavin-Team-Software-Engineering\\use" +
-    "r.png";
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.ImageLocation = "";
             this.pictureBox1.Location = new System.Drawing.Point(543, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(140, 140);
@@ -84,9 +90,9 @@
             // 
             // logoutBtn
             // 
-            this.logoutBtn.Location = new System.Drawing.Point(543, 318);
+            this.logoutBtn.Location = new System.Drawing.Point(543, 360);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(75, 23);
+            this.logoutBtn.Size = new System.Drawing.Size(75, 38);
             this.logoutBtn.TabIndex = 6;
             this.logoutBtn.Text = "Logout";
             this.logoutBtn.UseVisualStyleBackColor = true;
@@ -122,17 +128,47 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(18, 107);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(478, 234);
             this.dataGridView1.TabIndex = 10;
             // 
+            // delApt
+            // 
+            this.delApt.Location = new System.Drawing.Point(18, 361);
+            this.delApt.Name = "delApt";
+            this.delApt.Size = new System.Drawing.Size(139, 37);
+            this.delApt.TabIndex = 11;
+            this.delApt.Text = "Delete Appoinment";
+            this.delApt.UseVisualStyleBackColor = true;
+            this.delApt.Click += new System.EventHandler(this.delApt_Click);
+            // 
+            // upDateApt
+            // 
+            this.upDateApt.Location = new System.Drawing.Point(179, 361);
+            this.upDateApt.Name = "upDateApt";
+            this.upDateApt.Size = new System.Drawing.Size(139, 37);
+            this.upDateApt.TabIndex = 12;
+            this.upDateApt.Text = "Update Appoinemnt";
+            this.upDateApt.UseVisualStyleBackColor = true;
+            this.upDateApt.Click += new System.EventHandler(this.upDateApt_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 363);
+            this.ClientSize = new System.Drawing.Size(695, 411);
+            this.Controls.Add(this.upDateApt);
+            this.Controls.Add(this.delApt);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.searchAptBtn);
             this.Controls.Add(this.label1);
@@ -145,7 +181,6 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
-            this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -164,6 +199,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button searchAptBtn;
         private System.Windows.Forms.DataGridView dataGridView1;
-
+        private System.Windows.Forms.Button delApt;
+        private System.Windows.Forms.Button upDateApt;
+        private System.Windows.Forms.Timer timer1;
     }
 }

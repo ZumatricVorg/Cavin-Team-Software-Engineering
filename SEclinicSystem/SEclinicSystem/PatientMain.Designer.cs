@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.label1 = new System.Windows.Forms.Label();
             this.lblPatientID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,18 +53,11 @@
             this.btnUpdateDetails = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(16, 83);
-            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 0;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(417, 58);
+            this.label1.Location = new System.Drawing.Point(371, 39);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 17);
@@ -77,7 +69,7 @@
             // 
             this.lblPatientID.AutoSize = true;
             this.lblPatientID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPatientID.Location = new System.Drawing.Point(523, 58);
+            this.lblPatientID.Location = new System.Drawing.Point(477, 39);
             this.lblPatientID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPatientID.Name = "lblPatientID";
             this.lblPatientID.Size = new System.Drawing.Size(52, 17);
@@ -88,7 +80,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(417, 93);
+            this.label2.Location = new System.Drawing.Point(371, 74);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 17);
@@ -99,7 +91,7 @@
             // 
             this.lblPatientName.AutoSize = true;
             this.lblPatientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPatientName.Location = new System.Drawing.Point(523, 93);
+            this.lblPatientName.Location = new System.Drawing.Point(477, 74);
             this.lblPatientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPatientName.Name = "lblPatientName";
             this.lblPatientName.Size = new System.Drawing.Size(46, 17);
@@ -111,7 +103,7 @@
             // 
             this.lblNRIC.AutoSize = true;
             this.lblNRIC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNRIC.Location = new System.Drawing.Point(523, 128);
+            this.lblNRIC.Location = new System.Drawing.Point(477, 109);
             this.lblNRIC.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNRIC.Name = "lblNRIC";
             this.lblNRIC.Size = new System.Drawing.Size(46, 17);
@@ -123,7 +115,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(417, 128);
+            this.label4.Location = new System.Drawing.Point(371, 109);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 17);
@@ -134,7 +126,7 @@
             // 
             this.lblDOB.AutoSize = true;
             this.lblDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDOB.Location = new System.Drawing.Point(523, 193);
+            this.lblDOB.Location = new System.Drawing.Point(477, 174);
             this.lblDOB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDOB.Name = "lblDOB";
             this.lblDOB.Size = new System.Drawing.Size(46, 17);
@@ -146,7 +138,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(417, 193);
+            this.label5.Location = new System.Drawing.Point(371, 174);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 17);
@@ -157,7 +149,7 @@
             // 
             this.lblPhoneNo.AutoSize = true;
             this.lblPhoneNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhoneNo.Location = new System.Drawing.Point(523, 228);
+            this.lblPhoneNo.Location = new System.Drawing.Point(477, 209);
             this.lblPhoneNo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhoneNo.Name = "lblPhoneNo";
             this.lblPhoneNo.Size = new System.Drawing.Size(46, 17);
@@ -169,7 +161,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(417, 228);
+            this.label6.Location = new System.Drawing.Point(371, 209);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 17);
@@ -180,7 +172,7 @@
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(523, 259);
+            this.lblEmail.Location = new System.Drawing.Point(477, 240);
             this.lblEmail.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(46, 17);
@@ -192,7 +184,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(417, 259);
+            this.label7.Location = new System.Drawing.Point(371, 240);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(105, 17);
@@ -203,7 +195,7 @@
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddress.Location = new System.Drawing.Point(523, 295);
+            this.lblAddress.Location = new System.Drawing.Point(477, 276);
             this.lblAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(46, 17);
@@ -215,7 +207,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(417, 295);
+            this.label8.Location = new System.Drawing.Point(371, 276);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 17);
@@ -224,10 +216,11 @@
             // 
             // btnGoBack
             // 
-            this.btnGoBack.Location = new System.Drawing.Point(16, 10);
-            this.btnGoBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnGoBack.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnGoBack.Location = new System.Drawing.Point(23, 39);
+            this.btnGoBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnGoBack.Name = "btnGoBack";
-            this.btnGoBack.Size = new System.Drawing.Size(102, 28);
+            this.btnGoBack.Size = new System.Drawing.Size(141, 28);
             this.btnGoBack.TabIndex = 15;
             this.btnGoBack.Text = "Go Back";
             this.btnGoBack.UseVisualStyleBackColor = true;
@@ -237,7 +230,7 @@
             // 
             this.lblGender.AutoSize = true;
             this.lblGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGender.Location = new System.Drawing.Point(523, 161);
+            this.lblGender.Location = new System.Drawing.Point(477, 142);
             this.lblGender.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblGender.Name = "lblGender";
             this.lblGender.Size = new System.Drawing.Size(46, 17);
@@ -249,7 +242,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(417, 161);
+            this.label9.Location = new System.Drawing.Point(371, 142);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(60, 17);
@@ -259,21 +252,21 @@
             // createApt
             // 
             this.createApt.Enabled = false;
-            this.createApt.Location = new System.Drawing.Point(12, 310);
-            this.createApt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.createApt.Location = new System.Drawing.Point(23, 96);
+            this.createApt.Margin = new System.Windows.Forms.Padding(2);
             this.createApt.Name = "createApt";
-            this.createApt.Size = new System.Drawing.Size(141, 23);
+            this.createApt.Size = new System.Drawing.Size(141, 30);
             this.createApt.TabIndex = 19;
-            this.createApt.Text = "Create Appointment";
+            this.createApt.Text = "New Appointment";
             this.createApt.UseVisualStyleBackColor = true;
             this.createApt.Click += new System.EventHandler(this.createApt_Click);
             // 
             // btnSearchReport
             // 
-            this.btnSearchReport.Location = new System.Drawing.Point(577, 370);
-            this.btnSearchReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearchReport.Location = new System.Drawing.Point(179, 209);
+            this.btnSearchReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearchReport.Name = "btnSearchReport";
-            this.btnSearchReport.Size = new System.Drawing.Size(109, 28);
+            this.btnSearchReport.Size = new System.Drawing.Size(141, 28);
             this.btnSearchReport.TabIndex = 19;
             this.btnSearchReport.Text = "Search Report";
             this.btnSearchReport.UseVisualStyleBackColor = true;
@@ -281,10 +274,10 @@
             // 
             // btnNewReport
             // 
-            this.btnNewReport.Location = new System.Drawing.Point(440, 370);
-            this.btnNewReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNewReport.Location = new System.Drawing.Point(23, 209);
+            this.btnNewReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnNewReport.Name = "btnNewReport";
-            this.btnNewReport.Size = new System.Drawing.Size(113, 28);
+            this.btnNewReport.Size = new System.Drawing.Size(141, 28);
             this.btnNewReport.TabIndex = 20;
             this.btnNewReport.Text = "New Report";
             this.btnNewReport.UseVisualStyleBackColor = true;
@@ -292,10 +285,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 370);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Location = new System.Drawing.Point(179, 153);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 28);
+            this.button1.Size = new System.Drawing.Size(141, 28);
             this.button1.TabIndex = 21;
             this.button1.Text = "Search Prescription";
             this.button1.UseVisualStyleBackColor = true;
@@ -303,22 +296,22 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(146, 370);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Location = new System.Drawing.Point(23, 153);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(113, 28);
+            this.button2.Size = new System.Drawing.Size(141, 28);
             this.button2.TabIndex = 22;
-            this.button2.Text = "Add Prescription";
+            this.button2.Text = "New Prescription";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnUpdateDetails
             // 
-            this.btnUpdateDetails.Location = new System.Drawing.Point(168, 310);
+            this.btnUpdateDetails.Location = new System.Drawing.Point(179, 96);
             this.btnUpdateDetails.Name = "btnUpdateDetails";
-            this.btnUpdateDetails.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateDetails.Size = new System.Drawing.Size(141, 30);
             this.btnUpdateDetails.TabIndex = 23;
-            this.btnUpdateDetails.Text = "Update";
+            this.btnUpdateDetails.Text = "Update Patient";
             this.btnUpdateDetails.UseVisualStyleBackColor = true;
             this.btnUpdateDetails.Click += new System.EventHandler(this.btnUpdateDetails_Click_1);
             // 
@@ -326,7 +319,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 421);
+            this.ClientSize = new System.Drawing.Size(699, 342);
             this.Controls.Add(this.btnUpdateDetails);
             this.Controls.Add(this.createApt);
             this.Controls.Add(this.button2);
@@ -350,7 +343,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblPatientID);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.monthCalendar1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PatientMain";
             this.Text = "PatientMain";
@@ -360,8 +352,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblPatientID;
         private System.Windows.Forms.Label label2;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SEclinicSystem
 {
-    class StaffHandler
+    public class StaffHandler
     {
         OverSurgerySystem run = new OverSurgerySystem();
         DataTable dtResult = new DataTable();
@@ -19,6 +19,16 @@ namespace SEclinicSystem
                                 + " INNER JOIN StaffPosition ON Staff.staffID = StaffPosition.staffID"
                                 + " INNER JOIN Position ON StaffPosition.positionID = Position.positionID"
                                 + " WHERE positionName = 'DP' ");
+            return dtResult;
+        }
+
+        public DataTable selectAllNurse()
+        {
+
+            dtResult = run.getLocalSQLData("SELECT Staff.name,Staff.staffID FROM Staff"
+                                + " INNER JOIN StaffPosition ON Staff.staffID = StaffPosition.staffID"
+                                + " INNER JOIN Position ON StaffPosition.positionID = Position.positionID"
+                                + " WHERE positionName = 'Nurse' ");
             return dtResult;
         }
     }

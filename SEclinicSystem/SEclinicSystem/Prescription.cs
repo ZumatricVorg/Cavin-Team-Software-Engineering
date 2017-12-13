@@ -9,11 +9,11 @@ namespace SEclinicSystem
     public class Prescription
     {        
         private string prescriptionID;
-        private Appointment appointment;
-        private Medicine medicine;
-        private Staff staff;
-        private Patient patient;
-        private DateTime endDate;
+        private Appointment appointment = new Appointment();
+        private Medicine medicine = new Medicine();
+        private Staff staff = new Staff();
+        private Patient patient = new Patient();
+        private DateTime endDate = new DateTime();
 
         public string PrescriptionID
         {

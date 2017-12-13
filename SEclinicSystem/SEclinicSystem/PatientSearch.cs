@@ -18,6 +18,7 @@ namespace SEclinicSystem
 
         public PatientSearch()
         {
+           
             InitializeComponent();
             ResetForm();
         }
@@ -54,6 +55,9 @@ namespace SEclinicSystem
                         MessageBox.Show("Patient Not Found");
 
                     }
+                }else
+                {
+                    MessageBox.Show("Please enter an ID");
                 }
             }
             //search by name & DOB
@@ -79,6 +83,9 @@ namespace SEclinicSystem
                     {
                         MessageBox.Show("Patient Not Found");
                     }
+                }else
+                {
+                    MessageBox.Show("Please enter a Name and Date Of Birth");
                 }
             }            
             //search by name & address
@@ -103,6 +110,9 @@ namespace SEclinicSystem
                     {
                         MessageBox.Show("Patient Not Found");
                     }
+                }else
+                {
+                    MessageBox.Show("Please enter Name and address");
                 }
                 
             }
@@ -130,7 +140,7 @@ namespace SEclinicSystem
             comboBox1.Items.Insert(1, "Patient ID");
             comboBox1.Items.Insert(2, "Patient Name & Date of Birth");
             comboBox1.Items.Insert(3, "Patient Name & Address");
-            
+            comboBox1.SelectedIndex = 0;            
             txtPatientID.Text = "";
             txtPatientID.Enabled = false;
             txtPatientName.Text = "";

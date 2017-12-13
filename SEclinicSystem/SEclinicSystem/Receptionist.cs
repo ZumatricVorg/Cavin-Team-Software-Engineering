@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SEclinicSystem
 {
-    class Receptionist : Staff
+    public class Receptionist : Staff
     {
 
         private string loginID;

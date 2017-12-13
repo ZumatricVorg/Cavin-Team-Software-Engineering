@@ -12,32 +12,48 @@ using System.IO;
 
 namespace SEclinicSystem
 {
-    public class OverSurgerySystem
+    class OverSurgerySystem
     {
-        Staff staff = new Staff();
-        DataTable dtResult = new DataTable();
-        Int32 result;
-
+        private static OverSurgerySystem instance;
         // Create the connectionString
         // Trusted_Connection is used to denote the connection uses Windows Authentication
-
         //"Integrated Security=SSPI;Persist Security Info=False;Data Source=.\\SQLEXPRESS;Initial Catalog=OverSurgery;";
-        static string c = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\LENOVO\Documents\OverSurgery.mdf; Integrated Security = True; Connect Timeout = 30";
-        SqlConnection conn = new SqlConnection(c);
         Log log = new Log();
+
+        public static OverSurgerySystem Instance
+        {
+            get
+            {
+                if (instance == null) 
+                {
+                    instance = new OverSurgerySystem();
+                }
+ 
+                return instance;
+            }
+        }
+        public SqlConnection connectToDB()
+        {
+            
+            string c = "Integrated Security=SSPI;Persist Security Info=False;Data Source=.\\SQLEXPRESS;Initial Catalog=OverSurgery;";
+            SqlConnection conn = new SqlConnection(c);
+
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+            
+            return conn;
+        }
 
         //retrive data
         public DataTable getLocalSQLData(string query)
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(c))
+                using (SqlConnection conn = OverSurgerySystem.Instance.connectToDB() )
                 {
-                    if (conn.State == ConnectionState.Closed)
-                    {
-                        conn.Open();
-                    }
-
+                   
                     SqlCommand cmd = conn.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = query;
@@ -47,11 +63,6 @@ namespace SEclinicSystem
                     DataTable dt = new DataTable();
 
                     da.Fill(dt);
-
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
                     //  Log("WEB", "getLocalSQLData", "query: " + query);
                     return dt;
                 }
@@ -66,65 +77,21 @@ namespace SEclinicSystem
             { }
         }
 
-        //connect database
-        public string connect()
-        {
-            conn = new SqlConnection(c);
-
-            try
-            {
-                conn.Open();
-                //Perform database operation
-            }
-            catch (Exception ex)
-            {
-                return ex.ToString();
-            }
-
-            return "Done";
-        }
-
-        //close connection
-        public void closeConnection()
-        {
-            using (conn)
-            {
-                if (conn.State == ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-            }
-        }
-
-        //retrieve connection
-        public SqlConnection getConn()
-        {
-            return conn;
-        }
-
         //retrieve count data
         public Int32 getLocalSQLDataCount(string query)
         {
             try
             {
 
-                using (SqlConnection conn = new SqlConnection(c))
+                using (SqlConnection conn = OverSurgerySystem.Instance.connectToDB())
                 {
-                    if (conn.State == ConnectionState.Closed)
-                    {
-                        conn.Open();
-                    }
-
                     SqlCommand cmd = conn.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = query;
                     cmd.CommandTimeout = 0;
 
                     Int32 count = (Int32)cmd.ExecuteScalar();
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
+     
                     //  Log("WEB", "getLocalSQLData", "query: " + query);
                     return count;
                 }
@@ -148,14 +115,9 @@ namespace SEclinicSystem
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(c))
+                using (SqlConnection conn = OverSurgerySystem.Instance.connectToDB())
                 {
                     int x = 0;
-
-                    if (conn.State == ConnectionState.Closed)
-                    {
-                        conn.Open();
-                    }
 
                     SqlCommand cmd = conn.CreateCommand();
                     cmd.CommandType = CommandType.Text;
@@ -164,12 +126,6 @@ namespace SEclinicSystem
                     cmd.CommandTimeout = 0;
 
                     x = cmd.ExecuteNonQuery(); //returns row affected
-
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-
                     conn.Dispose();
 
                     return x;
@@ -185,29 +141,6 @@ namespace SEclinicSystem
             }
 
         }
-
-
-
-        public bool login(string loginID, string password)
-        {
-            result = getLocalSQLDataCount("SELECT* FROM login where username = '" + loginID + "' AND password = '" + password + "'");
-
-            if (result > 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public Staff credential(string id)
-        {
-
-            dtResult = getLocalSQLData("SELECT * FROM login INNER JOIN Staff on login.staffID = Staff.staffID WHERE login.username = '" + id + "'");
-            staff.StaffID = dtResult.Rows[0]["staffID"].ToString();
-            staff.FullName = dtResult.Rows[0]["name"].ToString();
-            return staff;
-        }
-
 
     }
 }

@@ -14,90 +14,135 @@ namespace SEclinicSystem
         public DataTable retrivePrescription(Prescription prescription)
         {        
 
-            DataTable result = run.getLocalSQLData(@"select [medicineID] FROM [Prescription] a with (nolock) where prescriptionID = '%" + prescription.PrescriptionID + "%' order by prescriptionID asc");
+            DataTable result = run.getLocalSQLData("select medicineID FROM PrescriptMedicine a with (nolock) where prescriptionID = '" + prescription.PrescriptionID + "' order by prescriptMedicineID asc");
             DataTable dt = new DataTable();
             dt.Columns.Add("MedicineID", typeof(string));
             dt.Columns.Add("MedicineName", typeof(string));
             dt.Columns.Add("Dosage", typeof(string));
-            dt.Columns.Add("Comsumption", typeof(string));
+            dt.Columns.Add("Consumption", typeof(string));
             dt.Columns.Add("Description", typeof(string));
 
-            if (result != null)
+            if (result.Rows.Count > 0)
             {
-                if (result.Rows.Count > 0)
-                {
-
-                    for(int i = 0; i < result.Rows.Count; i++)
+              for(int i = 0; i < result.Rows.Count; i++)
                     {
-                        DataTable mn = run.getLocalSQLData(@"SELECT top 1 [medicineID], [medicineName], [dosage], [comsumption], [description] FROM [Medicine] a with(nolock)  where medicineID  ='" + result.Rows[0]["medicineID"].ToString() + "' order by medicineID asc");
-                        dt.Rows.Add(mn.Rows[i]["medicineID"].ToString(), mn.Rows[i]["medicineName"].ToString(), mn.Rows[i]["dosage"].ToString(), mn.Rows[i]["comsumption"].ToString(), mn.Rows[i]["description"].ToString());   
+                        DataTable mn = run.getLocalSQLData(@"SELECT TOP 1 [medicineID], [medicineName], [dosage], [consumption], [description] FROM Medicine a with(nolock)  where medicineID  ='" + result.Rows[i]["medicineID"].ToString() + "' order by [medicineID] asc");
+                        if(mn != null)
+                        {
+                        
+                           dt.Rows.Add(mn.Rows[0]["medicineID"].ToString(), mn.Rows[0]["medicineName"].ToString(), mn.Rows[0]["dosage"].ToString(), mn.Rows[0]["consumption"].ToString(), mn.Rows[0]["description"].ToString());
+                        }                       
                     }
-
-                    return result;
-                }
-                else
-                {
-                    return null;
-                }
+                    //dt = result;
+                    return dt;          
             }
             else
             {
-                return null;
+                return dt;
             }
         }
 
-       //extend prescription method
-        public int extendPrescription(Prescription prescription)
+        public DataTable retriveExtendPrescription(Prescription prescription)
         {
-            string rrsql = "INSERT INTO [Prescription] ([appointmentID],[medicineID],[staffID],[patientID],[endDate]) VALUES ('" + prescription.Appointment.AppointmentID + "','" + prescription.Medicine.MedicineID + "','" + prescription.Staff.StaffID + "','" + prescription.Patient.PatientID + "','" + prescription.EndDate.Date + "')";
-            return run.WriteData(rrsql);
-        }
 
-        //check prescription limit method for each medicine
-        public bool checkPrescriptionLimit(Prescription prescription)
-        {
-            DataTable result = run.getLocalSQLData(@"SELECT top 1 [UnlimitedPrescription], [endDate] FROM [Medicine] a with(nolock)  where medicineID  ='" + prescription.Medicine.MedicineID + "' order by medicineID asc");
+            DataTable result = run.getLocalSQLData("select a.[medicineID], b.[endDate] FROM PrescriptMedicine as a join Prescription as b on a.prescriptionID = b.prescriptionID where a.prescriptionID = '"+prescription.PrescriptionID+"' order by prescriptMedicineID asc");
+            DataTable dt = new DataTable();
+            dt.Columns.Add("MedicineID", typeof(string));
+            dt.Columns.Add("MedicineName", typeof(string));
+            dt.Columns.Add("Dosage", typeof(string));
+            dt.Columns.Add("Consumption", typeof(string));
+            dt.Columns.Add("Description", typeof(string));
 
-            if (result != null)
+            if (result.Rows.Count > 0)
             {
-                if (result.Rows.Count > 0)
+                for (int i = 0; i < result.Rows.Count; i++)
                 {
-                    prescription.Medicine.UnlimitedPrescription = (bool)result.Rows[0]["unlimitedPrescription"];
-
-                    if(prescription.Medicine.UnlimitedPrescription == false)
+                    DataTable mn = run.getLocalSQLData(@"SELECT TOP 1 [medicineID], [medicineName], [dosage], [unlimitedPrescription], [consumption], [description] FROM Medicine a with(nolock)  where medicineID  ='" + result.Rows[i]["medicineID"].ToString() + "' order by [medicineID] asc");
+                    if (mn != null)
                     {
-                        TimeSpan ts = (DateTime)result.Rows[0]["unlimitedPrescription"] - DateTime.Now.Date;
+                        prescription.Medicine.UnlimitedPrescription = (bool)mn.Rows[0]["unlimitedPrescription"];
 
-                        if(ts.Days <= 30)
+                        if (prescription.Medicine.UnlimitedPrescription == false)
                         {
-                            return false;
+                            TimeSpan ts = DateTime.Now.Date - DateTime.Parse(result.Rows[0]["endDate"].ToString());
+
+                            if (ts.Days >= 30)
+                            {
+                                dt.Rows.Add(mn.Rows[0]["medicineID"].ToString(), mn.Rows[0]["medicineName"].ToString(), mn.Rows[0]["dosage"].ToString(), mn.Rows[0]["consumption"].ToString(), mn.Rows[0]["description"].ToString());
+                            }
+                            
                         }
                         else
                         {
-                            return true;
-                        }                        
-                    }
-                    else
-                    {
-                        return true;
+                            dt.Rows.Add(mn.Rows[0]["medicineID"].ToString(), mn.Rows[0]["medicineName"].ToString(), mn.Rows[0]["dosage"].ToString(), mn.Rows[0]["consumption"].ToString(), mn.Rows[0]["description"].ToString());
+                        }
+                        
                     }
                 }
-                else
-                {
-                    return false;
-                }
+                //dt = result;
+                return dt;
             }
             else
             {
-                return false;
+                return dt;
             }
         }
+
+
+        ////check prescription limit method for each medicine
+        //public bool checkPrescriptionLimit(Prescription prescription)
+        //{
+        //    DataTable result = run.getLocalSQLData(@"SELECT top 1 [UnlimitedPrescription] FROM [Medicine] a with(nolock)  where medicineID  ='" + prescription.Medicine.MedicineID + "' order by medicineID asc");
+
+        //    if (result != null)
+        //    {
+        //        if (result.Rows.Count > 0)
+        //        {
+        //            prescription.Medicine.UnlimitedPrescription = (bool)result.Rows[0]["unlimitedPrescription"];
+
+        //            if(prescription.Medicine.UnlimitedPrescription == false)
+        //            {
+        //                TimeSpan ts = (DateTime)result.Rows[0]["unlimitedPrescription"] - DateTime.Now.Date;
+
+        //                if(ts.Days <= 30)
+        //                {
+        //                    return false;
+        //                }
+        //                else
+        //                {
+        //                    return true;
+        //                }                        
+        //            }
+        //            else
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
         // add prescription method
         public int addPrescription(Prescription prescription)
         {
-            string rrsql = "INSERT INTO [Prescription] ([appointmentID],[medicineID],[staffID],[patientID],[endDate]) VALUES ('" + prescription.Appointment.AppointmentID + "','" + prescription.Medicine.MedicineID + "','" + prescription.Staff.StaffID + "','" + prescription.Patient.PatientID + "','" + prescription.EndDate.Date + "')";
-            return run.WriteData(rrsql);            
+            string rrsql = "INSERT INTO [Prescription] ([appointmentID],[staffID],[patientID],[endDate]) VALUES ('" + prescription.Appointment.AppointmentID + "','" + prescription.Staff.StaffID + "','" + prescription.Patient.PatientID + "','" + prescription.EndDate.Date.ToString("yyyy-MM-dd") + "')";
+            return run.WriteData(rrsql);
+        }
+
+        //add prescription Medicine
+        public int addPrescriptionMedicine(Prescription prescription)
+        {
+            DataTable result = run.getLocalSQLData("SELECT TOP 1 [prescriptionID]  FROM [Prescription] order by [prescriptionID] desc");
+            prescription.PrescriptionID = result.Rows[0]["prescriptionID"].ToString();
+            string sql = "INSERT INTO [PrescriptMedicine] ([prescriptionID], [medicineID]) VALUES ('" + prescription.PrescriptionID + "','" +prescription.Medicine.MedicineID + "')";
+            return run.WriteData(sql);
         }
 
     }

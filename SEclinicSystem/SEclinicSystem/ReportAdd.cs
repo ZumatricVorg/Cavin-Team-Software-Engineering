@@ -17,35 +17,60 @@ namespace SEclinicSystem
         OverSurgerySystem run = new OverSurgerySystem();
         Report report = new Report();
         ReportHandler rh = new ReportHandler();
+        DataTable dtResult = new DataTable();
+        StaffHandler sHler = new StaffHandler();
+        AutoCompleteStringCollection MyCollection = new AutoCompleteStringCollection();
+        AppointmentHandler aHlder = new AppointmentHandler();
 
         public ReportAdd(Patient patient)
         {
-            report.Patient.PatientID = patient.PatientID;            
+            report.Patient.PatientID = patient.PatientID;
             InitializeComponent();
             clearList();
             setPatientName();
+            dtResult = sHler.selectAllDP();
+
+            if (dtResult == null)
+            {
+                return;
+            }
+            else
+            {
+                foreach (DataRow row in dtResult.Rows)
+                {
+                    MyCollection.Add(row["name"].ToString());
+                }
+
+                txtGPName.AutoCompleteCustomSource = MyCollection;
+            }
+            allApt();
+        }
+
+        public void allApt()
+        {
+            dtResult = aHlder.checkAllApt();
+
+            if (dtResult == null)
+            {
+                return;
+            }
+            else
+            {
+                foreach (DataRow row in dtResult.Rows)
+                {
+                    MyCollection.Add(row["Id"].ToString());
+                }
+
+                txtAppointmentID.AutoCompleteCustomSource = MyCollection;
+            }
+
         }
 
         //Textbox change for GP Name
         private void ReportAdd_Load(object sender, EventArgs e)
         {
-            string resp = run.connect();
-            AutoCompleteStringCollection gpNameCollection = new AutoCompleteStringCollection();
-
-            if (resp == "Done")
-            {
-                SqlCommand cmd = new SqlCommand(@"select [fullName] FROM [Staff] order by fullName asc", run.getConn());
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    gpNameCollection.Add(reader.GetString(0));
-                }
-                txtGPName.AutoCompleteCustomSource = gpNameCollection;
-
-                run.closeConnection();
-            }
-
-        }
+          
+        }   
 
         //reset list
         private void clearList()
@@ -59,11 +84,11 @@ namespace SEclinicSystem
         //set txtPatientName textbox value (patient's name)
         private void setPatientName()
         {
-            DataTable dt = run.getLocalSQLData("SELECT [patientName] FROM [Patient] WHERE patientId = '" + report.Patient.PatientID + "' ORDER BY [patientID] ASC");
+            DataTable dt = run.getLocalSQLData("SELECT [name] FROM [Patient] WHERE patientID = '" + report.Patient.PatientID + "' ORDER BY [patientID] ASC");
 
             if (dt.Rows.Count > 0)
             {
-                report.Patient.Name = dt.Rows[0]["patientName"].ToString();
+                report.Patient.Name = dt.Rows[0]["name"].ToString();
                 txtPatientName.Text = report.Patient.Name;
             }
 
@@ -85,7 +110,7 @@ namespace SEclinicSystem
                 return;
             }
 
-            DataTable gp = run.getLocalSQLData("SELECT [staffID] FROM [Staff] WHERE [fullName] = '" + txtGPName.Text.ToString() + "' ORDER BY [staffID] ASC");
+            DataTable gp = run.getLocalSQLData("SELECT [staffID] FROM [Staff] WHERE [name] = '" + txtGPName.Text.ToString() + "' ORDER BY [staffID] ASC");
             report.Staff.StaffID = gp.Rows[0]["staffID"].ToString();
 
             report.Appointment.AppointmentID = txtAppointmentID.Text;
@@ -120,7 +145,7 @@ namespace SEclinicSystem
             }
             else if (txtGPName.Text.Trim() != "")
             {
-                Regex emp1 = new Regex("^[a-z-A-Z]+$");
+                Regex emp1 = new Regex("^[\\sa-z-A-Z]+$");
 
                 if (!emp1.IsMatch(txtGPName.Text))
                 {
@@ -130,14 +155,14 @@ namespace SEclinicSystem
                 }
             }
             // Appointment ID validation
-            else if (txtAppointmentID.Text.Trim() == "")
+             if (txtAppointmentID.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up apponintment ID.");
                 txtAppointmentID.Focus();
                 return false;
             }
             // Description validation
-            else if (txtDescription.Text.Trim() == "")
+             if (txtDescription.Text.Trim() == "")
             {
                 MessageBox.Show("Please fill up the description!");
                 txtDescription.Focus();
@@ -146,5 +171,6 @@ namespace SEclinicSystem
 
             return validation;
         }
+       
     }
 }

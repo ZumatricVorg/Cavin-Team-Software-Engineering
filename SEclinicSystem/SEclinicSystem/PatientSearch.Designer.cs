@@ -60,7 +60,7 @@
             this.label3.Location = new System.Drawing.Point(28, 253);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 25);
+            this.label3.Size = new System.Drawing.Size(85, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "Address: ";
             // 
@@ -71,7 +71,7 @@
             this.label1.Location = new System.Drawing.Point(28, 416);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 25);
+            this.label1.Size = new System.Drawing.Size(125, 20);
             this.label1.TabIndex = 8;
             this.label1.Text = "Date Of Birth: ";
             // 
@@ -80,7 +80,7 @@
             this.txtPatientName.Location = new System.Drawing.Point(184, 194);
             this.txtPatientName.Margin = new System.Windows.Forms.Padding(4);
             this.txtPatientName.Name = "txtPatientName";
-            this.txtPatientName.Size = new System.Drawing.Size(384, 28);
+            this.txtPatientName.Size = new System.Drawing.Size(384, 24);
             this.txtPatientName.TabIndex = 11;
             // 
             // label2
@@ -90,7 +90,7 @@
             this.label2.Location = new System.Drawing.Point(28, 197);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(154, 25);
+            this.label2.Size = new System.Drawing.Size(127, 20);
             this.label2.TabIndex = 10;
             this.label2.Text = "Patient Name: ";
             // 
@@ -99,7 +99,7 @@
             this.txtPatientID.Location = new System.Drawing.Point(184, 134);
             this.txtPatientID.Margin = new System.Windows.Forms.Padding(4);
             this.txtPatientID.Name = "txtPatientID";
-            this.txtPatientID.Size = new System.Drawing.Size(384, 28);
+            this.txtPatientID.Size = new System.Drawing.Size(384, 24);
             this.txtPatientID.TabIndex = 13;
             // 
             // label4
@@ -109,7 +109,7 @@
             this.label4.Location = new System.Drawing.Point(28, 137);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(119, 25);
+            this.label4.Size = new System.Drawing.Size(100, 20);
             this.label4.TabIndex = 12;
             this.label4.Text = "Patient ID: ";
             // 
@@ -120,7 +120,7 @@
             this.label5.Location = new System.Drawing.Point(221, 11);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(216, 32);
+            this.label5.Size = new System.Drawing.Size(169, 26);
             this.label5.TabIndex = 14;
             this.label5.Text = "Search Patient";
             // 
@@ -159,16 +159,17 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(88, 76);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 24);
+            this.label6.Size = new System.Drawing.Size(37, 18);
             this.label6.TabIndex = 18;
             this.label6.Text = "By: ";
             // 
             // comboBox1
             // 
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(184, 76);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(298, 30);
+            this.comboBox1.Size = new System.Drawing.Size(298, 25);
             this.comboBox1.TabIndex = 19;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -176,12 +177,12 @@
             // 
             this.dtpDOB.Location = new System.Drawing.Point(185, 418);
             this.dtpDOB.Name = "dtpDOB";
-            this.dtpDOB.Size = new System.Drawing.Size(383, 28);
+            this.dtpDOB.Size = new System.Drawing.Size(383, 24);
             this.dtpDOB.TabIndex = 20;
             // 
             // PatientSearch
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 567);
             this.Controls.Add(this.dtpDOB);
