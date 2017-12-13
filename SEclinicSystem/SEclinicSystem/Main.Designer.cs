@@ -42,6 +42,7 @@
             this.delApt = new System.Windows.Forms.Button();
             this.upDateApt = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -118,7 +119,7 @@
             // 
             // searchAptBtn
             // 
-            this.searchAptBtn.Location = new System.Drawing.Point(231, 65);
+            this.searchAptBtn.Location = new System.Drawing.Point(421, 63);
             this.searchAptBtn.Name = "searchAptBtn";
             this.searchAptBtn.Size = new System.Drawing.Size(75, 23);
             this.searchAptBtn.TabIndex = 9;
@@ -162,11 +163,19 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(221, 65);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(194, 20);
+            this.dateTimePicker1.TabIndex = 13;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(695, 411);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.upDateApt);
             this.Controls.Add(this.delApt);
             this.Controls.Add(this.dataGridView1);
@@ -202,5 +211,6 @@
         private System.Windows.Forms.Button delApt;
         private System.Windows.Forms.Button upDateApt;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
