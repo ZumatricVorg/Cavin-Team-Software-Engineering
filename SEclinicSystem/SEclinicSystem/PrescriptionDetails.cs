@@ -137,32 +137,5 @@ namespace SEclinicSystem
             var ps = new PrescriptionSearch(prescription.Patient);
             ps.Show();
         }
-
-        ////check unlimited prescription when checked the check box
-        //private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    DataGridView dgv = (DataGridView)sender;
-
-        //    if (dgv.CurrentCell.GetType() != typeof(DataGridViewCheckBoxCell))
-        //    {
-        //        DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
-        //        ch1 = (DataGridViewCheckBoxCell)dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[5];
-
-        //        if (ch1.Value == ch1.TrueValue)
-        //        {
-        //            prescription.Medicine.MedicineID = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].ToString();
-        //            prescription.Medicine.MedicineName = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[1].ToString();
-        //            bool result = ph.checkPrescriptionLimit(prescription);
-
-        //            if (result == false)
-        //            {
-        //                MessageBox.Show(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[1].ToString() + " medicine cannot be extended!");
-        //                ch1.Value = ch1.FalseValue;
-        //            }
-
-        //        }
-
-        //    }
-        //}
     }
 }

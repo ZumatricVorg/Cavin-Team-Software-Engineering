@@ -48,7 +48,7 @@ namespace SEclinicSystem
 
         public void allApt()
         {
-            dtResult = aHlder.checkAllApt();
+            dtResult = aHlder.checkAllApt(report.Patient.PatientID);
 
             if (dtResult == null)
             {

@@ -42,7 +42,7 @@ namespace SEclinicSystem
                 lblDOB.Text = result.Rows[0]["dateOfBirth"].ToString();
                 lblPhoneNo.Text = result.Rows[0]["phoneNo"].ToString();
                 lblEmail.Text = result.Rows[0]["email"].ToString();
-                lblAddress.Text = result.Rows[0]["address"].ToString().Replace("\r\n",Environment.NewLine);
+                lblAddress.Text = result.Rows[0]["address"].ToString().Replace("\\n", Environment.NewLine);
 
                 createApt.Enabled = true;
 

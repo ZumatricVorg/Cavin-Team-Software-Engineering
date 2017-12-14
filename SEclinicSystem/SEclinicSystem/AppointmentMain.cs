@@ -19,9 +19,12 @@ namespace SEclinicSystem
         StaffHandler sHlder = new StaffHandler();
         DataTable dtResult = new DataTable();
         Staff staff = new Staff();
+        Staff staff2 = new Staff();
+        Staff staff3 = new Staff();
 
         string message = "";
         int count = 0;
+        int count2 = 0;
         Patient patient = new Patient();
 
         public AppointmentMain(string pID,string aID)
@@ -124,12 +127,13 @@ namespace SEclinicSystem
 
         private void createApt_Click(object sender, EventArgs e)
         {
-            Staff staff2 = new Staff();
+
             app.Date = date.Value.Date;
             app.Time = DateTime.Parse(timeList.SelectedItem.ToString());
             app.Remark = remark.SelectedItem.ToString();
             app.Msg = msgBox.Text;
             staff2.StaffID = dtResult.Rows[gpName.SelectedIndex]["staffID"].ToString();
+            staff3.StaffID = dtResult.Rows[nurseBox.SelectedIndex]["staffID"].ToString();
             DateTime aptTime = DateTime.Parse(app.Date.ToString("dd/MM/yyyy") + " " + app.Time.ToString("hh:mm tt"));
 
             if (aptTime < DateTime.Now)
@@ -147,18 +151,31 @@ namespace SEclinicSystem
             else
             {
                 count = aHdler.check(staff2.StaffID, app);
-                if(count > 0)
+
+                if (count > 0)
                 {
-                    MessageBox.Show("Appointment Clash! Please select another Date");
-                    return;
-                }else
-                {
-                    message = aHdler.book(patient.PatientID, staff2.StaffID, app);
-                    MessageBox.Show(message);
+                    MessageBox.Show("GP appointment Clash! Please select another Date ");
+                  
                 }
+                else
+                {
+                    count2 = aHdler.check(staff3.StaffID, app);
+                    if (count2 > 0)
+                    {
+                        MessageBox.Show("Nurse appointment Clash! Please select another Date ");
+                       
+                    }
+                    else
+                    {
+                        message = aHdler.change(app);
+                        MessageBox.Show(message);
+                    }
+
+                }
+
+                this.Close();
             }
-            this.Close();           
-        }
+}
 
         private void remark_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -179,10 +196,12 @@ namespace SEclinicSystem
 
         private void upDateApt_Click(object sender, EventArgs e)
         {
-             Staff staff2 = new Staff();
+
             app.Date = date.Value.Date;
             app.Time = DateTime.Parse(timeList.SelectedItem.ToString());
             staff2.StaffID = dtResult.Rows[gpName.SelectedIndex]["staffID"].ToString();
+            staff3.StaffID = dtResult.Rows[nurseBox.SelectedIndex]["staffID"].ToString();
+
             DateTime aptTime = DateTime.Parse(app.Date.ToString("dd/MM/yyyy") + " " + app.Time.ToString("hh:mm tt"));
 
             if (aptTime < DateTime.Now)
@@ -192,14 +211,24 @@ namespace SEclinicSystem
             }
     
                 count = aHdler.check(staff2.StaffID, app);
-                if(count > 0)
+                
+            if (count > 0)
                 {
-                    MessageBox.Show("Appointment Clash! Please select another Date");
-                    return;
+                    MessageBox.Show("GP appointment Clash! Please select another Date ");
+                    
                 }else
                 {
-                    message = aHdler.change(app);
-                    MessageBox.Show(message);
+                     count2 = aHdler.check(staff3.StaffID, app);
+                    if(count2 > 0)
+                     {
+                    MessageBox.Show("Nurse appointment Clash! Please select another Date ");
+                  
+                    }else
+                         {
+                              message = aHdler.change(app);
+                              MessageBox.Show(message);
+                         }
+                
                 }
             
             this.Close();           

@@ -61,6 +61,15 @@ namespace SEclinicSystem
             return result;
         }
 
+        public int check2(string id, Appointment app)
+        {
+            result = dbCon.getLocalSQLDataCount("SELECT COUNT(*) FROM Appointment"
+                                                + " WHERE nurseID = '" + id + "' AND Cstatus != 'completed'"
+                                                + " AND startDate = '" + app.Date.ToString("yyyy-MM-dd") + "'"
+                                                + " AND startTime = '" + app.Time.ToString("hh:mm tt") + "'");
+            return result;
+        }
+
         public void cancel(Appointment app)
         {
             result = dbCon.getLocalSQLDataCount("DELETE Appointment WHERE Id = '" + app.AppointmentID + "'");
@@ -77,10 +86,10 @@ namespace SEclinicSystem
             return dt;
         }
 
-        public DataTable checkAllApt()
+        public DataTable checkAllApt(string pID)
         {
             DataTable dt = new DataTable();
-            dt = dbCon.getLocalSQLData("SELECT * FROM Appointment");
+            dt = dbCon.getLocalSQLData("SELECT * FROM Appointment WHERE patientID = '"+pID+"'");
 
 
             return dt;

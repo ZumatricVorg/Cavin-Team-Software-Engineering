@@ -87,48 +87,6 @@ namespace SEclinicSystem
                 return dt;
             }
         }
-
-
-        ////check prescription limit method for each medicine
-        //public bool checkPrescriptionLimit(Prescription prescription)
-        //{
-        //    DataTable result = run.getLocalSQLData(@"SELECT top 1 [UnlimitedPrescription] FROM [Medicine] a with(nolock)  where medicineID  ='" + prescription.Medicine.MedicineID + "' order by medicineID asc");
-
-        //    if (result != null)
-        //    {
-        //        if (result.Rows.Count > 0)
-        //        {
-        //            prescription.Medicine.UnlimitedPrescription = (bool)result.Rows[0]["unlimitedPrescription"];
-
-        //            if(prescription.Medicine.UnlimitedPrescription == false)
-        //            {
-        //                TimeSpan ts = (DateTime)result.Rows[0]["unlimitedPrescription"] - DateTime.Now.Date;
-
-        //                if(ts.Days <= 30)
-        //                {
-        //                    return false;
-        //                }
-        //                else
-        //                {
-        //                    return true;
-        //                }                        
-        //            }
-        //            else
-        //            {
-        //                return true;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
         // add prescription method
         public int addPrescription(Prescription prescription)
         {

@@ -56,7 +56,7 @@ namespace SEclinicSystem
 
         public void allApt()
         {
-            dtResult = aHlder.checkAllApt();
+            dtResult = aHlder.checkAllApt(prescription.Patient.PatientID);
 
             if (dtResult == null)
             {
