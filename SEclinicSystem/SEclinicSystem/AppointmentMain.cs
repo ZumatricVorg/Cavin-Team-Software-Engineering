@@ -145,7 +145,7 @@ namespace SEclinicSystem
             if (app.Remark == "Immediate")
             {
                 OverSurgerySystem dbCon = new OverSurgerySystem();
-                message = aHdler.book(patient.PatientID, staff2.StaffID, app);
+                message = aHdler.book(patient.PatientID, staff2.StaffID, staff3.StaffID, app);
                 MessageBox.Show(message);
             }
             else
@@ -167,7 +167,7 @@ namespace SEclinicSystem
                     }
                     else
                     {
-                        message = aHdler.change(app);
+                        message = aHdler.book(patient.PatientID, staff2.StaffID, staff3.StaffID, app);
                         MessageBox.Show(message);
                     }
 

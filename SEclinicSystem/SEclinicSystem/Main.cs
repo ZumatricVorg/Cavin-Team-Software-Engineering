@@ -66,6 +66,7 @@ namespace SEclinicSystem
 
             if (staff.Position == "Nurse")
             {
+                dateTimePicker1.Visible = false;
                 delApt.Visible = false;
                 upDateApt.Visible = false;
                 searchAptBtn.Visible = false;

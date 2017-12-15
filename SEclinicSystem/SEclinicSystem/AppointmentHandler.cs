@@ -13,10 +13,10 @@ namespace SEclinicSystem
         OverSurgerySystem dbCon = new OverSurgerySystem();
         int result;
 
-        public string book(string pID,string id,Appointment app)
+        public string book(string pID,string id,string nID,Appointment app)
         {
             // result = dbCon.WriteData("INSERT INTO Appointment(staffID, startTime, startDate, Cstatus, remark) VALUES('1', '" + app.Time + "','" + app.Date.Date + "', 'pending', '" + app.Remark + "')");
-            result = dbCon.WriteData("INSERT INTO Appointment(staffID, startTime, startDate, Cstatus, remark, patientID, message) VALUES('" + id + "', '" + app.Time.ToString("hh:mm tt") + "','" + app.Date.ToString("yyyy-MM-dd") + "', 'pending', '" + app.Remark + "','"+pID+"','"+ app.Msg +"')");
+            result = dbCon.WriteData("INSERT INTO Appointment(staffID, startTime, startDate, Cstatus, remark, patientID, message,nurseID) VALUES('" + id + "', '" + app.Time.ToString("hh:mm tt") + "','" + app.Date.ToString("yyyy-MM-dd") + "', 'pending', '" + app.Remark + "','"+pID+"','"+ app.Msg +"' + '"+ nID + "')");
 
             if (result == 1)
             {
@@ -100,7 +100,7 @@ namespace SEclinicSystem
             DataTable dt = new DataTable();
             dt = dbCon.getLocalSQLData("SELECT a.Id,s.name as GP,s2.name as Nurse,a.startTime as Time,a.startDate as Date,a.Cstatus as Status,a.remark as Remark,a.message as Message"
                                        + " FROM Appointment as a INNER JOIN Staff as s ON a.staffID = s.staffID"
-                                       +" INNER JOIN OverSurgery.dbo.Staff as s2 ON a.nurseID = s2.staffID"
+                                       +" INNER JOIN Staff as s2 ON a.nurseID = s2.staffID"
                                        + " WHERE a.Cstatus = 'pending' AND a.startDate = CAST(GETDATE() as DATE) ORDER BY startDate DESC");
 
             return dt;
