@@ -19,8 +19,7 @@ namespace SEclinicSystem
         StaffHandler sHlder = new StaffHandler();
         DataTable dtResult = new DataTable();
         Staff staff = new Staff();
-        Staff staff2 = new Staff();
-        Staff staff3 = new Staff();
+      
 
         string message = "";
         int count = 0;
@@ -127,7 +126,8 @@ namespace SEclinicSystem
 
         private void createApt_Click(object sender, EventArgs e)
         {
-
+            Staff staff2 = new Staff();
+            Staff staff3 = new Staff();
             app.Date = date.Value.Date;
             app.Time = DateTime.Parse(timeList.SelectedItem.ToString());
             app.Remark = remark.SelectedItem.ToString();
@@ -196,7 +196,8 @@ namespace SEclinicSystem
 
         private void upDateApt_Click(object sender, EventArgs e)
         {
-
+            Staff staff2 = new Staff();
+            Staff staff3 = new Staff();
             app.Date = date.Value.Date;
             app.Time = DateTime.Parse(timeList.SelectedItem.ToString());
             staff2.StaffID = dtResult.Rows[gpName.SelectedIndex]["staffID"].ToString();

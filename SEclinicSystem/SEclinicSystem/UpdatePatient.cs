@@ -27,6 +27,13 @@ namespace SEclinicSystem
             ddlGender.Items.Insert(2, "Female");
             Clear();
             setValue();
+            
+            txtNRIC1.Enabled = false;
+            txtNRIC2.Enabled = false;
+            txtNRIC3.Enabled = false;
+            ddlGender.Enabled = false;
+            dtpDOB.Enabled = false;
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)

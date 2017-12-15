@@ -123,6 +123,7 @@ namespace SEclinicSystem
                 MessageBox.Show("Please enter a GP name");
                 return;
             }
+            appt.Date = dateTimePicker1.Value.Date;
             dataGridView1.DataSource = aptHler.selectGpAppointment(staff2, appt);
         }
 

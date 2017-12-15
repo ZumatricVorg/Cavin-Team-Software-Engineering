@@ -16,7 +16,7 @@ namespace SEclinicSystem
         public string book(string pID,string id,string nID,Appointment app)
         {
             // result = dbCon.WriteData("INSERT INTO Appointment(staffID, startTime, startDate, Cstatus, remark) VALUES('1', '" + app.Time + "','" + app.Date.Date + "', 'pending', '" + app.Remark + "')");
-            result = dbCon.WriteData("INSERT INTO Appointment(staffID, startTime, startDate, Cstatus, remark, patientID, message,nurseID) VALUES('" + id + "', '" + app.Time.ToString("hh:mm tt") + "','" + app.Date.ToString("yyyy-MM-dd") + "', 'pending', '" + app.Remark + "','"+pID+"','"+ app.Msg +"' + '"+ nID + "')");
+            result = dbCon.WriteData("INSERT INTO Appointment(staffID, startTime, startDate, Cstatus, remark, patientID, message,nurseID) VALUES('" + id + "', '" + app.Time.ToString("hh:mm tt") + "','" + app.Date.ToString("yyyy-MM-dd") + "', 'pending', '" + app.Remark + "','"+pID+"','"+ app.Msg +"','"+ nID + "')");
 
             if (result == 1)
             {
@@ -79,9 +79,10 @@ namespace SEclinicSystem
         public DataTable selectGpAppointment(Staff staff,Appointment app)
         {
             DataTable dt = new DataTable();
-            dt = dbCon.getLocalSQLData("SELECT s.name as Name,a.startTime as Time,a.startDate as Date,a.Cstatus as Status,a.remark as Remark,a.message as Message"
+            dt = dbCon.getLocalSQLData("SELECT s.name as GP,s2.name as Nurse,a.startTime as Time,a.startDate as Date,a.Cstatus as Status,a.remark as Remark,a.message as Message"
                                        + " FROM Appointment as a INNER JOIN Staff as s ON a.staffID = s.staffID"
-                                       +" WHERE s.name = '"+staff.FullName+"' AND a.startDate ='"+ app.Date.ToString("yyyy-MM-dd") + "' ");
+                                       + " INNER JOIN Staff as s2 ON a.nurseID = s2.staffID"
+                                       + " WHERE s.name = '"+staff.FullName+"' AND a.startDate ='"+ app.Date.ToString("yyyy-MM-dd") + "' ");
 
             return dt;
         }

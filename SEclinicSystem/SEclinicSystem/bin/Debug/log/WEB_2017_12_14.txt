@@ -6,3 +6,36 @@
    at SEclinicSystem.OverSurgerySystem.getLocalSQLDataCount(String query) in C:\Users\LENOVO\Desktop\ARU\Sem2\Software Engineer\Assingment\SEclinicSystem\SEclinicSystem\OverSurgerySystem.cs:line 93
 14/12/17 3:25:14 PM       : getLocalSQLData                : query: SELECT * FROM login WHERE username = 'admin' AND password = 't7wqL1u21SHmTIl0wUPpoA==' ; Err :System.NullReferenceException: Object reference not set to an instance of an object.
    at SEclinicSystem.OverSurgerySystem.getLocalSQLDataCount(String query) in C:\Users\LENOVO\Desktop\ARU\Sem2\Software Engineer\Assingment\SEclinicSystem\SEclinicSystem\OverSurgerySystem.cs:line 93
+14/12/17 7:08:35 PM       : WriteDBLog                     : Err :System.Data.SqlClient.SqlException (0x80131904): There are more columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SEclinicSystem.OverSurgerySystem.WriteData(String query) in C:\Users\LENOVO\Desktop\ARU\Sem2\Software Engineer\Assingment\SEclinicSystem\SEclinicSystem\OverSurgerySystem.cs:line 128
+ClientConnectionId:84db6d49-e9f1-4e6c-ad2b-bd30fe9b9ed2
+Error Number:109,State:1,Class:15
+14/12/17 7:08:57 PM       : WriteDBLog                     : Err :System.Data.SqlClient.SqlException (0x80131904): There are more columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SEclinicSystem.OverSurgerySystem.WriteData(String query) in C:\Users\LENOVO\Desktop\ARU\Sem2\Software Engineer\Assingment\SEclinicSystem\SEclinicSystem\OverSurgerySystem.cs:line 128
+ClientConnectionId:84db6d49-e9f1-4e6c-ad2b-bd30fe9b9ed2
+Error Number:109,State:1,Class:15
+14/12/17 7:13:35 PM       : WriteDBLog                     : Err :System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near ','.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SEclinicSystem.OverSurgerySystem.WriteData(String query) in C:\Users\LENOVO\Desktop\ARU\Sem2\Software Engineer\Assingment\SEclinicSystem\SEclinicSystem\OverSurgerySystem.cs:line 128
+ClientConnectionId:c771b125-e012-4d4f-a4c3-ba85c360fc46
+Error Number:102,State:1,Class:15
